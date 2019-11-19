@@ -4,7 +4,8 @@
   "description": "Markdown-it plugin that adds a custom container to add Baleada Prose components to markdown.",
   "main": "lib/index.js",
   "scripts": {
-    "prepare": "node scripts/prepare.js"
+    "prepare": "node scripts/prepare.js",
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "@nuxtjs/eslint-config": "^1.1.2",
     "ava": "^2.4.0",
     "babel-eslint": "^10.0.3",
+    "core-js": "^3.4.1",
     "eslint": "^6.6.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-ava": "^9.0.0",
@@ -42,7 +44,8 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-nuxt": "^0.5.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "regenerator-runtime": "^0.13.3"
   },
   "dependencies": {
     "markdown-it-container": "^2.0.0"
