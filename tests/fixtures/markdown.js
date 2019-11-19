@@ -1,13 +1,13 @@
 export const aside = '\
 ::: type="info"\n\
 aside\n\
-:::\n\
+:::\
 '
 
 export const blockquote = '\
 :::\n\
 > blockquote\n\
-:::\n\
+:::\
 '
 
 export const codeblock = '\
@@ -15,13 +15,13 @@ export const codeblock = '\
 ```\n\
 codeblock\n\
 ```\n\
-:::\n\
+:::\
 '
 
 export const details = '\
-::: summary="details"\n\
+::: summary="summary"\n\
 details\n\
-:::\n\
+:::\
 '
 
 export const grid = '\
@@ -29,17 +29,17 @@ export const grid = '\
 | Grid |\n\
 | --- |\n\
 | grid |\n\
-:::\n\
+:::\
 '
 
 export const heading = '\
 :::\n\
 # Heading\n\
-:::\n\
+:::\
 '
 
 export const section = '\
 :::\n\
 section\n\
-:::\n\
+:::\
 '
