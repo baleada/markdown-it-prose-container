@@ -1,16 +1,16 @@
-export const aside = '\
+export const proseAside = '\
 ::: type="info"\n\
 aside\n\
 :::\
 '
 
-export const blockquote = '\
+export const proseBlockquote = '\
 :::\n\
 > blockquote\n\
 :::\
 '
 
-export const codeblock = '\
+export const proseCodeblock = '\
 :::\n\
 ```\n\
 codeblock\n\
@@ -18,13 +18,13 @@ codeblock\n\
 :::\
 '
 
-export const details = '\
+export const proseDetails = '\
 ::: summary="summary"\n\
 details\n\
 :::\
 '
 
-export const grid = '\
+export const proseGrid = '\
 :::\n\
 | Grid |\n\
 | --- |\n\
@@ -32,14 +32,26 @@ export const grid = '\
 :::\
 '
 
-export const heading = '\
+export const proseHeading = '\
 :::\n\
 # Heading\n\
 :::\
 '
 
-export const section = '\
+export const proseSection = '\
 :::\n\
 section\n\
 :::\
+'
+
+export const blockquote = '\
+'
+
+export const codeblock = '\
+'
+
+export const grid = '\
+'
+
+export const heading = '\
 '

@@ -1,8 +1,7 @@
 import test from 'ava'
 import MarkdownIt from 'markdown-it'
-import MarkdownItContainer from 'markdown-it-container'
 import plugin from '../src'
-import { aside, blockquote, codeblock, details, grid, heading, section } from './fixtures/markdown'
+import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseSection, blockquote, codeblock, grid, heading } from './fixtures/markdown'
 
 const md = new MarkdownIt()
 md.use(plugin, 'vue') // Vue is hardcoded here because all template formatting is tested in toBound.test.js
@@ -14,50 +13,50 @@ test('plugin(md, [invalid] throws error)', t => {
 })
 
 test('renders ProseAside', t => {
-  const value = md.render(aside),
+  const value = md.render(proseAside),
         expected = '<ProseAside v-bind="{\'type\':\'info\'}">\n<p>aside</p>\n</ProseAside>\n'
 
   t.is(value, expected)
 })
 
 test('renders ProseBlockquote', t => {
-  const value = md.render(blockquote),
-        expected = '<ProseBlockquote v-bind="{}">\n<blockquote><p>blockquote</p></blockquote>\n</ProseBlockquote>'
+  const value = md.render(proseBlockquote),
+        expected = '<ProseBlockquote v-bind="{}">\n<blockquote>\n<p>blockquote</p>\n</blockquote>\n</ProseBlockquote>\n'
 
   t.is(value, expected)
 })
 
 test('renders ProseCodeblock', t => {
-  const value = md.render(codeblock),
-        expected = '<ProseCodeblock v-bind="{}">\n<pre><code>codeblock</code></pre>\n</ProseCodeblock>'
+  const value = md.render(proseCodeblock),
+        expected = '<ProseCodeblock v-bind="{}">\n<pre><code>codeblock\n</code></pre>\n</ProseCodeblock>\n'
 
   t.is(value, expected)
 })
-//
-// test('renders ProseDetails', t => {
-//   const value = md.render(details),
-//         expected = '<ProseDetails v-bind="{\'summary\':\'summary\'}">\n<p>details</p>\n</ProseDetails>'
-//
-//   t.is(value, expected)
-// })
+
+test('renders ProseDetails', t => {
+  const value = md.render(proseDetails),
+        expected = '<ProseDetails v-bind="{\'summary\':\'summary\'}">\n<p>details</p>\n</ProseDetails>\n'
+
+  t.is(value, expected)
+})
 
 // test('renders ProseGrid', t => {
-//   const value = md.render(grid),
-//         expected = '<ProseAside type="info">\n<p>aside</p>\n</ProseAside>'
+//   const value = md.render(proseGrid),
+//         expected = '<ProseAside type="info">\n<p>aside</p>\n</ProseAside>\n'
 //
 //   t.is(value, expected)
 // })
 
-// test('renders ProseHeading', t => {
-//   const value = md.render(heading),
-//         expected = '<ProseHeading :level="1">\n<h1>heading</h1>\n</ProseHeading>'
-//
-//   t.is(value, expected)
-// })
+test('renders ProseHeading', t => {
+  const value = md.render(proseHeading),
+        expected = '<ProseHeading v-bind="{\'level\':1}">\n<span>Heading</span>\n</ProseHeading>\n'
 
-// test('renders ProseSection', t => {
-//   const value = md.render(section),
-//         expected = '<ProseSection v-bind="{}">\n<p>section</p>\n</ProseSection>'
-//
-//   t.is(value, expected)
-// })
+  t.is(value, expected)
+})
+
+test('renders ProseSection', t => {
+  const value = md.render(proseSection),
+        expected = '<ProseSection v-bind="{}">\n<p>section</p>\n</ProseSection>\n'
+
+  t.is(value, expected)
+})

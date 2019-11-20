@@ -1,8 +1,6 @@
 // ::: ...props
 import MarkdownItContainer from 'markdown-it-container'
-import guessContainerType from './util/guessContainerType'
-import toBound from './util/toBound'
-import toProps from './util/toProps'
+import { container, headingOpen, headingClose, tableOpen, tableDescendant } from './renderGetters'
 
 const validTemplateTypes = ['jsx', 'svelte', 'vue'],
       defaultOptions = {
@@ -30,20 +28,21 @@ export default function(md, templateType, options = {}) {
   md.use(MarkdownItContainer, 'prose', {
     marker,
     validate: (params) => true,
-    render: getRenderProseContainer(md, templateType),
+    render: container(md, templateType),
   })
-}
 
-function getRenderProseContainer (md, templateType) {
-  return (tokens, index) => {
-    const { info, nesting } = tokens[index],
-          nextType = index < tokens.length - 1 ? tokens[index + 1].type : undefined,
-          containerType = guessContainerType({ info, nesting, nextType }),
-          props = toProps(info, containerType),
-          boundProps = toBound(props, templateType)
-
-    return nesting === 1
-      ? `<${containerType} ${boundProps}>\n`
-      : `</${containerType}>\n`
-  }
+  md.renderer.rules.heading_open = headingOpen(md)
+  md.renderer.rules.heading_close = headingClose(md)
+  md.renderer.rules.table_open = tableOpen(md)
+  md.renderer.rules.table_close = tableDescendant(md, 'Grid', false)
+  md.renderer.rules.thead_open = tableDescendant(md, 'Rowgroup', true)
+  md.renderer.rules.thead_close = tableDescendant(md, 'Rowgroup', false)
+  md.renderer.rules.tbody_open = tableDescendant(md, 'Rowgroup', true)
+  md.renderer.rules.tbody_close = tableDescendant(md, 'Rowgroup', false)
+  md.renderer.rules.tr_open = tableDescendant(md, 'Row', true)
+  md.renderer.rules.tr_close = tableDescendant(md, 'Row', false)
+  md.renderer.rules.th_open = tableDescendant(md, 'Columnheader', true)
+  md.renderer.rules.th_close = tableDescendant(md, 'Columnheader', false)
+  md.renderer.rules.td_open = tableDescendant(md, 'Gridcell', true)
+  md.renderer.rules.td_close = tableDescendant(md, 'Gridcell', false)
 }
