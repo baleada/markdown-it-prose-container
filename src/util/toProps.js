@@ -25,7 +25,7 @@ const propsInterfaces = [
     }
   },
   {
-    name: 'ProseGridContainer',
+    name: 'ProseGrid',
     interface: {
       canFilterByQuery: 'boolean',
       filterQueryIsCaseSensitive: 'boolean',
@@ -36,6 +36,13 @@ const propsInterfaces = [
     name: 'ProseHeading',
     interface: {
       level: 'number'
+    }
+  },
+  {
+    name: 'ProseList',
+    interface: {
+      canFilterByQuery: 'boolean',
+      filterQueryIsCaseSensitive: 'boolean',
     }
   },
   {

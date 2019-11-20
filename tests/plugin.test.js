@@ -1,7 +1,7 @@
 import test from 'ava'
 import MarkdownIt from 'markdown-it'
 import plugin from '../src'
-import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseSection, blockquote, codeblock, grid, heading } from './fixtures/markdown'
+import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseList, proseSection, blockquote, codeblock, grid, heading, list } from './fixtures/markdown'
 
 const md = new MarkdownIt()
 md.use(plugin, 'vue') // Vue is hardcoded here because all template formatting is tested in toBound.test.js
@@ -59,11 +59,11 @@ test('renders ProseDetails', t => {
   t.is(value, expected)
 })
 
-test('renders ProseGridContainer', t => {
+test('renders ProseGrid', t => {
   const value = md.render(proseGrid),
         expected = '\
-<ProseGridContainer v-bind="{}">\n\
-<ProseGrid>\n\
+<ProseGrid v-bind="{}">\n\
+<ProseGridContents>\n\
 <ProseRowgroup>\n\
 <ProseRow>\n\
 <ProseColumnheader>Grid</ProseColumnheader>\n\
@@ -74,8 +74,8 @@ test('renders ProseGridContainer', t => {
 <ProseGridcell>grid</ProseGridcell>\n\
 </ProseRow>\n\
 </ProseRowgroup>\n\
+</ProseGridContents>\n\
 </ProseGrid>\n\
-</ProseGridContainer>\n\
 '
 
   t.is(value, expected)
@@ -87,6 +87,19 @@ test('renders ProseHeading', t => {
 <ProseHeading v-bind="{\'level\':1}">\n\
 <span>Heading</span>\n\
 </ProseHeading>\n\
+'
+
+  t.is(value, expected)
+})
+
+test('renders ProseList', t => {
+  const value = md.render(proseList),
+        expected = '\
+<ProseList v-bind="{\'isOrdered\':true}">\n\
+<ProseListContents>\n\
+<ProseListItem>list item</ProseListItem>\n\
+</ProseListContents>\n\
+</ProseList>\n\
 '
 
   t.is(value, expected)
@@ -148,6 +161,17 @@ test('renders heading', t => {
   const value = md.render(heading),
         expected = '\
 <h1>Heading</h1>\n\
+'
+
+  t.is(value, expected)
+})
+
+test('renders list', t => {
+  const value = md.render(list),
+        expected = '\
+<ul>\n\
+<li>list item</li>\n\
+</ul>\n\
 '
 
   t.is(value, expected)

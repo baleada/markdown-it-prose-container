@@ -2,7 +2,7 @@ import { getPreviousToken, replaceTag } from '../util'
 
 const state = {}
 
-export function tableOpen (md) {
+export function listOpen (md) {
   return (tokens, index, options) => {
     const previousToken = getPreviousToken(tokens, index),
           isProse = previousToken ? previousToken.type === 'container_prose_open' : false,
@@ -11,12 +11,12 @@ export function tableOpen (md) {
     state.isProse = isProse
 
     return isProse
-      ? replaceTag(defaultTag, 'ProseGridContents', true)
+      ? replaceTag(defaultTag, 'ProseListContents', true)
       : defaultTag
   }
 }
 
-export function tableDescendant (md, type, isOpen) {
+export function listDescendant (md, type, isOpen) {
   return (tokens, index, options) => {
     const isProse = state.isProse,
           defaultTag = md.renderer.renderToken(tokens, index, options)

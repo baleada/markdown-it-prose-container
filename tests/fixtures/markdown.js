@@ -38,6 +38,12 @@ export const proseHeading = '\
 :::\
 '
 
+export const proseList = '\
+:::\n\
+1. list item\n\
+:::\n\
+'
+
 export const proseSection = '\
 :::\n\
 section\n\
@@ -62,4 +68,8 @@ export const grid = '\
 
 export const heading = '\
 # Heading\n\
+'
+
+export const list = '\
+- list item\n\
 '

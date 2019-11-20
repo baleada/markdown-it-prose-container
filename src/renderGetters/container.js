@@ -1,18 +1,20 @@
-import { getNextToken, guessContainerType, toBound, toProps } from '../util'
+import { getProps, guessContainerType, toBound } from '../util'
 
 export default function(md, templateType) {
   return (tokens, index) => {
     const { info, nesting } = tokens[index],
-          nextToken = getNextToken(tokens, index),
+          isOpen = nesting === 1,
+          nextToken = isOpen ? tokens[index + 1] : undefined,
           nextType = nextToken ? nextToken.type : undefined,
-          containerType = guessContainerType({ info, nesting, nextType }),
-          props = containerType === 'ProseHeading'
-            ? { level: nextToken && Number(nextToken.tag[1]) }
-            : toProps(info, containerType),
-          boundProps = toBound(props, templateType)
+          containerType = guessContainerType({ info, nesting, nextType })
 
-    return nesting === 1
-      ? `<${containerType} ${boundProps}>\n`
-      : `</${containerType}>\n`
+    if (isOpen) {
+      const props = getProps(info, containerType, nextToken),
+            boundProps = toBound(props, templateType)
+
+      return `<${containerType} ${boundProps}>\n`
+    } else {
+      return `</${containerType}>\n`
+    }
   }
 }

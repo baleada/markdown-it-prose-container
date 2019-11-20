@@ -2,8 +2,10 @@ const state = {},
       componentNextTypes = {
         fence: 'ProseCodeblock',
         heading_open: 'ProseHeading',
-        table_open: 'ProseGridContainer',
-        blockquote_open: 'ProseBlockquote'
+        table_open: 'ProseGrid',
+        blockquote_open: 'ProseBlockquote',
+        ordered_list_open: 'ProseList',
+        bullet_list_open: 'ProseList',
       }
 
 export default function guessContainerType ({ info, nesting, nextType }) {
