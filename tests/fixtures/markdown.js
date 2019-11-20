@@ -45,13 +45,21 @@ section\n\
 '
 
 export const blockquote = '\
+> blockquote\n\
 '
 
 export const codeblock = '\
+```\n\
+codeblock\n\
+```\n\
 '
 
 export const grid = '\
+| Grid |\n\
+| --- |\n\
+| grid |\n\
 '
 
 export const heading = '\
+# Heading\n\
 '

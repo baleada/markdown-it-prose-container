@@ -102,3 +102,53 @@ test('renders ProseSection', t => {
 
   t.is(value, expected)
 })
+
+test('renders blockquote', t => {
+  const value = md.render(blockquote),
+        expected = '\
+<blockquote>\n\
+<p>blockquote</p>\n\
+</blockquote>\n\
+'
+
+  t.is(value, expected)
+})
+
+test('renders codeblock', t => {
+  const value = md.render(codeblock),
+        expected = '\
+<pre><code>codeblock\n\
+</code></pre>\n\
+'
+
+  t.is(value, expected)
+})
+
+test('renders grid', t => {
+  const value = md.render(grid),
+        expected = '\
+<table>\n\
+<thead>\n\
+<tr>\n\
+<th>Grid</th>\n\
+</tr>\n\
+</thead>\n\
+<tbody>\n\
+<tr>\n\
+<td>grid</td>\n\
+</tr>\n\
+</tbody>\n\
+</table>\n\
+'
+
+  t.is(value, expected)
+})
+
+test('renders heading', t => {
+  const value = md.render(heading),
+        expected = '\
+<h1>Heading</h1>\n\
+'
+
+  t.is(value, expected)
+})
