@@ -25,7 +25,7 @@ const propsInterfaces = [
     }
   },
   {
-    name: 'ProseGrid',
+    name: 'ProseGridContainer',
     interface: {
       canFilterByQuery: 'boolean',
       filterQueryIsCaseSensitive: 'boolean',

@@ -2,7 +2,7 @@ const state = {},
       componentNextTypes = {
         fence: 'ProseCodeblock',
         heading_open: 'ProseHeading',
-        table_open: 'ProseGrid',
+        table_open: 'ProseGridContainer',
         blockquote_open: 'ProseBlockquote'
       }
 
