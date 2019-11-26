@@ -101,9 +101,10 @@ test('renders ProseHeading', t => {
 test('renders ProseList', t => {
   const value = md.render(proseList),
         expected = '\
-<ProseList v-bind="{\'isOrdered\':true}">\n\
-<ProseListContents>\n\
-<ProseListItem>list item</ProseListItem>\n\
+<ProseList v-bind="{}">\n\
+<ProseListContents v-bind="{\'isOrdered\':true}">\n\
+<ProseListItem v-bind="{\'index\':0}">list item</ProseListItem>\n\
+<ProseListItem v-bind="{\'index\':1}">also list item</ProseListItem>\n\
 </ProseListContents>\n\
 </ProseList>\n\
 '

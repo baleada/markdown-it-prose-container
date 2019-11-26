@@ -47,11 +47,11 @@ export default function(md, templateType, options = {}) {
   md.renderer.rules.td_open = tableDescendant(md, 'Gridcell', true, templateType)
   md.renderer.rules.td_close = tableDescendant(md, 'Gridcell', false)
 
-  md.renderer.rules.ordered_list_open = listOpen(md)
+  md.renderer.rules.ordered_list_open = listOpen(md, true, templateType)
   md.renderer.rules.ordered_list_close = listDescendant(md, 'ListContents', false)
-  md.renderer.rules.bullet_list_open = listOpen(md)
+  md.renderer.rules.bullet_list_open = listOpen(md, false, templateType)
   md.renderer.rules.bullet_list_close = listDescendant(md, 'ListContents', false)
-  md.renderer.rules.list_item_open = listDescendant(md, 'ListItem', true)
+  md.renderer.rules.list_item_open = listDescendant(md, 'ListItem', true, templateType)
   md.renderer.rules.list_item_close = listDescendant(md, 'ListItem', false)
 
 }

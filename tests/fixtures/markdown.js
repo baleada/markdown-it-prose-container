@@ -42,6 +42,7 @@ export const proseHeading = '\
 export const proseList = '\
 :::\n\
 1. list item\n\
+1. also list item\n\
 :::\n\
 '
 

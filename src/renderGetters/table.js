@@ -45,7 +45,7 @@ const tableDescendantPropGetters = [
       const parentDistance = tokens
         .slice(0, index)
         .reverse()
-        .filter(({ type }) => type.includes('_open') && !type.startsWith('td'))
+        .filter(({ type }) => ['thead_open', 'tbody_open', 'tr_open'].some(t => type.includes(t)))
         .findIndex(({ type }) => type.startsWith('thead') || type.startsWith('tbody'))
 
       return { index: parentDistance }
@@ -57,7 +57,7 @@ const tableDescendantPropGetters = [
       const parentDistance = tokens
         .slice(0, index)
         .reverse()
-        .filter(({ type }) => type.includes('_open'))
+        .filter(({ type }) => ['th_open', 'tr_open'].some(t => type.includes(t)))
         .findIndex(({ type }) => type.startsWith('tr'))
 
       return { index: parentDistance }
@@ -69,7 +69,7 @@ const tableDescendantPropGetters = [
       const parentDistance = tokens
         .slice(0, index)
         .reverse()
-        .filter(({ type }) => type.includes('_open'))
+        .filter(({ type }) => ['td_open', 'tr_open'].some(t => type.includes(t)))
         .findIndex(({ type }) => type.startsWith('tr'))
 
       return { index: parentDistance }
