@@ -28,7 +28,8 @@ const propsInterfaces = [
     name: 'ProseGrid',
     interface: {
       canFilterByQuery: 'boolean',
-      filterQueryIsCaseSensitive: 'boolean',
+      filterIsCaseSensitive: 'boolean',
+      canChangeFilterIsCaseSensitive: 'boolean',
       ariaLabel: 'string',
     }
   },
@@ -42,7 +43,8 @@ const propsInterfaces = [
     name: 'ProseList',
     interface: {
       canFilterByQuery: 'boolean',
-      filterQueryIsCaseSensitive: 'boolean',
+      filterIsCaseSensitive: 'boolean',
+      canChangeFilterIsCaseSensitive: 'boolean',
     }
   },
   {
