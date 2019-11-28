@@ -1,70 +1,15 @@
-const propsInterfaces = [
-  {
-    name: 'ProseAside',
-    interface: {
-      type: 'string'
-    }
-  },
-  {
-    name: 'ProseBlockquote',
-    interface: {
-      isTweetable: 'boolean',
-      tweetText: 'string',
-      tweetHashtags: 'array',
-    }
-  },
-  {
-    name: 'ProseCodeblock',
-    interface: {
-    }
-  },
-  {
-    name: 'ProseDetails',
-    interface: {
-      summary: 'string'
-    }
-  },
-  {
-    name: 'ProseGrid',
-    interface: {
-      canFilterByQuery: 'boolean',
-      filterIsCaseSensitive: 'boolean',
-      canChangeFilterIsCaseSensitive: 'boolean',
-      ariaLabel: 'string',
-    }
-  },
-  {
-    name: 'ProseHeading',
-    interface: {
-      level: 'number'
-    }
-  },
-  {
-    name: 'ProseList',
-    interface: {
-      canFilterByQuery: 'boolean',
-      filterIsCaseSensitive: 'boolean',
-      canChangeFilterIsCaseSensitive: 'boolean',
-    }
-  },
-  {
-    name: 'ProseSection',
-    interface: {
-    }
-  },
-],
-      propParsers = {
-        array: group => group.replace(/^\[/, '').replace(/\]$/, '').split(','),
-        boolean: group => group === undefined || group === 'true',
-        date: group => group,
-        'function': group => group,
-        map: group => group,
-        number: group => Number(group),
-        object: group => group,
-        string: group => group.replace(/^"/, '').replace(/"$/, ''),
-      }
+const propParsers = {
+  array: group => group.replace(/^\[/, '').replace(/\]$/, '').split(','),
+  boolean: group => group === undefined || group === 'true',
+  date: group => group,
+  'function': group => group,
+  map: group => group,
+  number: group => Number(group),
+  object: group => group,
+  string: group => group.replace(/^"/, '').replace(/"$/, ''),
+}
 
-export default function(info, containerType) {
+export default function({ info, containerType, propsInterfaces }) {
   const attributes = info.match(/(\w*?=(".*?"|\w+|\[.*?\])|\w+)/g),
         propsInterface = propsInterfaces.find(({ name }) => name === containerType).interface
 

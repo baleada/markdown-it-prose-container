@@ -2,21 +2,14 @@
 import MarkdownItContainer from 'markdown-it-container'
 import { container, headingOpen, headingClose, tableOpen, tableDescendant, listOpen, listDescendant } from './renderGetters'
 
-const validTemplateTypes = ['jsx', 'svelte', 'vue'],
-      defaultOptions = {
-        marker: ':',
-      }
+const defaultOptions = {
+  marker: ':',
+}
 
-export default function(md, templateType, options = {}) {
-  try {
-    templateType = templateType.toLowerCase()
-  } catch (error) {
-    throw error
-  }
-
-  if (!validTemplateTypes.includes(templateType)) {
-    throw new Error('invalid templateType')
-  }
+export default function(md, required = {}, options = {}) {
+  const { templateType, propsInterfaces } = required
+  validateTemplateType(templateType)
+  validatePropsInterfaces(propsInterfaces)
 
   options = {
     ...defaultOptions,
@@ -28,7 +21,7 @@ export default function(md, templateType, options = {}) {
   md.use(MarkdownItContainer, 'prose', {
     marker,
     validate: (params) => true,
-    render: container(md, templateType),
+    render: container(md, { templateType, propsInterfaces }),
   })
 
   md.renderer.rules.heading_open = headingOpen(md)
@@ -53,5 +46,14 @@ export default function(md, templateType, options = {}) {
   md.renderer.rules.bullet_list_close = listDescendant(md, 'ListContents', false)
   md.renderer.rules.list_item_open = listDescendant(md, 'ListItem', true, templateType)
   md.renderer.rules.list_item_close = listDescendant(md, 'ListItem', false)
+}
 
+function validateTemplateType (templateType) {
+  if (!['jsx', 'svelte', 'vue'].includes(templateType)) {
+    throw new Error('invalid templateType: must be one of "jsx", "svelte", or "vue"')
+  }
+}
+
+function validatePropsInterfaces (propsInterfaces) {
+  // assert Object
 }

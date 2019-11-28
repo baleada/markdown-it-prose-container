@@ -1,6 +1,6 @@
 import { getProps, guessContainerType, toBound } from '../util'
 
-export default function(md, templateType) {
+export default function(md, { templateType, propsInterfaces }) {
   return (tokens, index) => {
     const { info, nesting } = tokens[index],
           isOpen = nesting === 1,
@@ -9,7 +9,7 @@ export default function(md, templateType) {
           containerType = guessContainerType({ info, nesting, nextType })
 
     if (isOpen) {
-      const props = getProps(info, containerType, nextToken),
+      const props = getProps({ info, containerType, nextToken, propsInterfaces }),
             boundProps = toBound(props, templateType)
 
       return `<${containerType} ${boundProps}>\n`
