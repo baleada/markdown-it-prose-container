@@ -1,10 +1,11 @@
 import test from 'ava'
 import MarkdownIt from 'markdown-it'
+import propsInterfaces from '@baleada/prose/vue/propsInterfaces'
 import plugin from '../src'
 import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseList, proseSection, blockquote, codeblock, grid, heading, list } from './fixtures/markdown'
 
 const md = new MarkdownIt()
-md.use(plugin, 'vue') // Vue is hardcoded here because all template formatting is tested in toBound.test.js
+md.use(plugin, { templateType: 'vue', propsInterfaces }) // Vue is hardcoded here because all template formatting is tested in toBound.test.js
 
 test('plugin(md, [invalid] throws error)', t => {
   const m = new MarkdownIt(),
@@ -62,22 +63,22 @@ test('renders ProseDetails', t => {
 test('renders ProseGrid', t => {
   const value = md.render(proseGrid),
         expected = '\
-<ProseGrid v-bind="{}">\n\
+<ProseGrid v-bind="{\'rows\':[{\'rowgroup\':0,\'row\':0},{\'rowgroup\':1,\'row\':0},{\'rowgroup\':1,\'row\':1}],\'gridcells\':[{\'rowgroup\':0,\'row\':0,\'gridcell\':0},{\'rowgroup\':0,\'row\':0,\'gridcell\':1},{\'rowgroup\':1,\'row\':0,\'gridcell\':0},{\'rowgroup\':1,\'row\':0,\'gridcell\':1},{\'rowgroup\':1,\'row\':1,\'gridcell\':0},{\'rowgroup\':1,\'row\':1,\'gridcell\':1}]}">\n\
 <ProseGridContents>\n\
-<ProseRowgroup v-bind="{\'index\':0}">\n\
-<ProseRow v-bind="{\'index\':0}">\n\
-<ProseColumnheader v-bind="{\'index\':0}">Prose</ProseColumnheader>\n\
-<ProseColumnheader v-bind="{\'index\':1}">Grid</ProseColumnheader>\n\
+<ProseRowgroup v-bind="{}">\n\
+<ProseRow v-bind="{\'rowgroup\':0,\'index\':0}">\n\
+<ProseColumnheader v-bind="{\'rowgroup\':0,\'row\':0,\'index\':0}">Prose</ProseColumnheader>\n\
+<ProseColumnheader v-bind="{\'rowgroup\':0,\'row\':0,\'index\':1}">Grid</ProseColumnheader>\n\
 </ProseRow>\n\
 </ProseRowgroup>\n\
-<ProseRowgroup v-bind="{\'index\':1}">\n\
+<ProseRowgroup v-bind="{}">\n\
 <ProseRow v-bind="{\'index\':0}">\n\
-<ProseGridcell v-bind="{\'index\':0}">0, 0</ProseGridcell>\n\
-<ProseGridcell v-bind="{\'index\':1}">0, 1</ProseGridcell>\n\
+<ProseGridcell v-bind="{\'rowgroup\':1,\'row\':0,\'index\':0}">0, 0</ProseGridcell>\n\
+<ProseGridcell v-bind="{\'rowgroup\':1,\'row\':0,\'index\':1}">0, 1</ProseGridcell>\n\
 </ProseRow>\n\
 <ProseRow v-bind="{\'index\':1}">\n\
-<ProseGridcell v-bind="{\'index\':0}">1, 0</ProseGridcell>\n\
-<ProseGridcell v-bind="{\'index\':1}">1, 1</ProseGridcell>\n\
+<ProseGridcell v-bind="{\'rowgroup\':1,\'row\':1,\'index\':0}">1, 0</ProseGridcell>\n\
+<ProseGridcell v-bind="{\'rowgroup\':1,\'row\':1,\'index\':1}">1, 1</ProseGridcell>\n\
 </ProseRow>\n\
 </ProseRowgroup>\n\
 </ProseGridContents>\n\

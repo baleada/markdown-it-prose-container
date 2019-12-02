@@ -46,9 +46,10 @@ const tableDescendantPropGetters = [
         .slice(0, index)
         .reverse()
         .filter(({ type }) => ['thead_open', 'tbody_open', 'tr_open'].some(t => type.includes(t)))
-        .findIndex(({ type }) => type.startsWith('thead') || type.startsWith('tbody'))
+        .findIndex(({ type }) => type.startsWith('thead') || type.startsWith('tbody')),
+            isHeader = tokens.slice(0, index).reverse()[0] === 'thead_open'
 
-      return { index: parentDistance }
+      return { rowgroup: isHeader ? 0 : 1, index: parentDistance }
     }
   },
   {
@@ -60,19 +61,25 @@ const tableDescendantPropGetters = [
         .filter(({ type }) => ['th_open', 'tr_open'].some(t => type.includes(t)))
         .findIndex(({ type }) => type.startsWith('tr'))
 
-      return { index: parentDistance }
+      return { rowgroup: 0, row: 0, index: parentDistance }
     }
   },
   {
     tag: 'td',
     toProps: (tokens, index) => {
-      const parentDistance = tokens
+      const tableOpenDistance = tokens
         .slice(0, index)
         .reverse()
-        .filter(({ type }) => ['td_open', 'tr_open'].some(t => type.includes(t)))
-        .findIndex(({ type }) => type.startsWith('tr'))
+        .findIndex(({ type }) => type === 'table_open'),
+            table = tokens.slice(index - tableOpenDistance, index + 1),
+            rows = table.filter(({ type }) => type === 'tr_open').length,
+            parentDistance = table
+              .reverse()
+              .slice(1)
+              .filter(({ type }) => ['td_open', 'tr_open'].includes(type))
+              .findIndex(({ type }) => type.startsWith('tr'))
 
-      return { index: parentDistance }
+      return { rowgroup: 1, row: rows - 1, index: parentDistance }
     }
   },
 ]

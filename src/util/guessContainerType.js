@@ -22,7 +22,11 @@ export default function guessContainerType ({ info, nesting, nextType }) {
 const componentConditions = [
   {
     name: 'ProseAside',
-    condition: info => /\s*?type=/.test(info)
+    condition: info => /\s*?type="(?:info|warning|danger|success)"/.test(info)
+  },
+  {
+    name: 'ProseMedia',
+    condition: info => /\s*?type="(?:image|video|audio)"/.test(info)
   },
   {
     name: 'ProseDetails',

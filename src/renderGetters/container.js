@@ -9,7 +9,7 @@ export default function(md, { templateType, propsInterfaces }) {
           containerType = guessContainerType({ info, nesting, nextType })
 
     if (isOpen) {
-      const props = getProps({ info, containerType, nextToken, propsInterfaces }),
+      const props = getProps({ tokens, index, info, containerType, nextToken, propsInterfaces }),
             boundProps = toBound(props, templateType)
 
       return `<${containerType} ${boundProps}>\n`
