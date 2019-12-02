@@ -11,17 +11,20 @@ export default function({ tokens, index, info, containerType, nextToken, propsIn
           openTokens = table.filter(({ type }) => ['tr_open', 'th_open', 'td_open'].includes(type)),
           rows = openTokens
             .filter(({ type }) => type === 'tr_open')
-            .map((token, index) => ({ row: index === 0 ? 0 : index - 1 })), // First row is header, second row starts body. Correct row coordinate for those would be { rowgroup: 1, row: index - 1 }
+            .map((token, index) => ({
+              rowgroup: index === 0 ? 0 : 1,
+              row: index === 0 ? 0 : index - 1,
+            })),
           columnHeaders = openTokens
             .filter(({ type }) => type === 'th_open')
-            .map((token, index) => ({ rowgroup: 0, row: 0, index })),
+            .map((token, index) => ({ rowgroup: 0, row: 0, gridcell: index })),
           columns = columnHeaders.length,
           bodyCells = openTokens
             .filter(({ type }) => type === 'td_open')
             .map((token, index) => ({
               rowgroup: 1,
               row: Math.floor(index / columns),
-              index
+              gridcell: index - (Math.floor(index / columns) * columns),
             })),
           gridcells = [...columnHeaders, ...bodyCells]
 
