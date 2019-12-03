@@ -40,7 +40,7 @@ const listDescendantPropGetters = [
       const parentDistance = tokens
         .slice(0, index)
         .reverse()
-        .filter(({ type }) => ['list_item_open', 'ordered_list_open', 'bullet_list_open'].some(t => type.includes(t)))
+        .filter(({ type }) => ['ordered_list_open', 'bullet_list_open', 'list_item_open'].includes(type))
         .findIndex(({ type }) => type.startsWith('ordered_list') || type.startsWith('bullet_list'))
 
       return { index: parentDistance }
