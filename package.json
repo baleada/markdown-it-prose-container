@@ -1,6 +1,6 @@
 {
   "name": "@baleada/markdown-it-prose-container",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Markdown-it plugin that adds a custom container to add Baleada Prose components to markdown.",
   "main": "lib/index.js",
   "scripts": {
@@ -52,6 +52,6 @@
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {
-    "@baleada/prose": "^0.0.0",
+    "@baleada/prose": "0.x"
   }
 }
