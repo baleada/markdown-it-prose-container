@@ -1,11 +1,12 @@
-import getNextToken from './getNextToken'
-import getOpenIndex from './getOpenIndex'
-import getPreviousToken from './getPreviousToken'
-import getProps from './getProps'
-import guessContainerType from './guessContainerType'
-import replaceTag from './replaceTag'
-import toBound from './toBound'
-import toProps from './toProps'
+import getNextToken from './getNextToken.js'
+import getOpenIndex from './getOpenIndex.js'
+import getPreviousToken from './getPreviousToken.js'
+import getProps from './getProps.js'
+import guessContainerType from './guessContainerType.js'
+import removeTag from './removeTag.js'
+import replaceTag from './replaceTag.js'
+import toBound from './toBound.js'
+import toProps from './toProps.js'
 
 export {
   getNextToken,
@@ -13,6 +14,7 @@ export {
   getPreviousToken,
   getProps,
   guessContainerType,
+  removeTag,
   replaceTag,
   toBound,
   toProps,

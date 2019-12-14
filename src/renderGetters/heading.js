@@ -1,4 +1,4 @@
-import { getPreviousToken, replaceTag } from '../util'
+import { getPreviousToken, removeTag } from '../util'
 
 const state = {}
 
@@ -11,7 +11,7 @@ export function headingOpen (md) {
     state.isProse = isProse
 
     return isProse
-      ? replaceTag(defaultTag, 'span', true)
+      ? removeTag(defaultTag)
       : defaultTag
   }
 }
@@ -22,7 +22,7 @@ export function headingClose (md) {
           defaultTag = md.renderer.renderToken(tokens, index, options)
 
     return isProse
-      ? replaceTag(defaultTag, 'span', false)
+      ? removeTag(defaultTag)
       : defaultTag
   }
 }

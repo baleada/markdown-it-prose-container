@@ -92,7 +92,7 @@ test('renders ProseHeading', t => {
   const value = md.render(proseHeading),
         expected = '\
 <ProseHeading v-bind="{\'level\':1}">\n\
-<span>Heading</span>\n\
+Heading\n\
 </ProseHeading>\n\
 '
 
