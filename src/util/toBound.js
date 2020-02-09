@@ -20,5 +20,5 @@ export default function(props, templateType) {
 }
 
 function singleQuoteStringify (props) {
-  return JSON.stringify(props).replace(/"/g, '\'')
+  return JSON.stringify(props).replace(/'/g, "\\'").replace(/"/g, "'")
 }
