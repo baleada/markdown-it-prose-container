@@ -1,10 +1,14 @@
 import toProps from './toProps'
 
+const writtenNewlineRegexp = new RegExp('\\{2,}n', 'g')
+
 export default function({ tokens, index, info, containerType, nextToken, propsInterfaces }) {
-  switch (true) {
-  case containerType === 'ProseHeading':
+  switch (containerType) {
+  case 'ProseCodeblock':
+    return { lines: tokens[index + 1].content.replace(writtenNewlineRegexp, '').split('\n').length - 1 }
+  case 'ProseHeading':
     return { level: nextToken && Number(nextToken.tag[1]) }
-  case containerType === 'ProseGrid':
+  case 'ProseGrid':
     const tokensAfterTableOpen = tokens.slice(index),
           tableCloseIndex = tokensAfterTableOpen.findIndex(({ type }) => type === 'table_close'),
           table = tokensAfterTableOpen.slice(0, tableCloseIndex),
@@ -33,7 +37,7 @@ export default function({ tokens, index, info, containerType, nextToken, propsIn
       rows,
       gridcells,
     }
-  case containerType === 'ProseList':
+  case 'ProseList':
     const tokensAfterListOpen = tokens.slice(index),
           listCloseIndex = tokensAfterListOpen.findIndex(({ type }) => type === 'ordered_list_close' || type === 'bullet_list_close'),
           list = tokensAfterListOpen.slice(0, listCloseIndex),

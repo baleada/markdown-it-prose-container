@@ -40,8 +40,9 @@ test('renders ProseBlockquote', t => {
 test('renders ProseCodeblock', t => {
   const value = md.render(proseCodeblock),
         expected = '\
-<ProseCodeblock v-bind="{}">\n\
+<ProseCodeblock v-bind="{\'lines\':2}">\n\
 <pre><code>codeblock\n\
+other line\n\
 </code></pre>\n\
 </ProseCodeblock>\n\
 '

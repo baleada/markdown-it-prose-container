@@ -14,6 +14,7 @@ export const proseCodeblock = '\
 :::\n\
 ```\n\
 codeblock\n\
+other line\n\
 ```\n\
 :::\
 '
