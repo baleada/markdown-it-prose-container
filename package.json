@@ -1,15 +1,15 @@
 {
-  "name": "@baleada/markdown-it-prose-container",
-  "version": "0.4.0",
+  "name": "@baleada/prose-container",
+  "version": "0.5.2",
   "description": "Markdown-it plugin that allows Baleada Prose components to be used in markdown files.",
-  "main": "lib/index.js",
+  "main": "markdown-it/index.js",
   "scripts": {
     "prepare": "node scripts/prepare.js",
     "test": "ava"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/baleada/markdown-it-prose-container.git"
+    "url": "git+https://gitlab.com/baleada/prose-container.git"
   },
   "keywords": [
     "baleada",
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/baleada/markdown-it-prose-container/issues"
+    "url": "https://gitlab.com/baleada/prose-container/issues"
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
@@ -36,6 +36,7 @@
     "@babel/preset-env": "^7.7.1",
     "@baleada/prose": "^0.6.5",
     "@nuxtjs/eslint-config": "^1.1.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "ava": "^3.5.0",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.4.1",
@@ -48,9 +49,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "markdown-it": "^10.0.0",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "rollup-plugin-babel": "^4.4.0"
   },
   "dependencies": {
+    "@baleada/prepare": "0.0.2",
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {

@@ -1,5 +1,6 @@
 const { exec } = require('@baleada/prepare')
 
 module.exports = function(dependency) {
-  exec(`npx babel src/${dependency} --out-file ${dependency}.js`)
+  const command = `rollup --config rollup/${dependency}.config.js`
+  exec(command)
 }

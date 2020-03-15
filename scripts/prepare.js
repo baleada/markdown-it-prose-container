@@ -1,9 +1,9 @@
 const generateIndex = require('./generateIndex'),
-      babelify = require('./babelify')
+      rollup = require('./rollup')
 
 function prepare () {
-  generateIndex('./src/util')
-  babelify()
+  generateIndex('./src/markdown-it/util')
+  rollup('markdown-it')
 }
 
 prepare()
