@@ -9,7 +9,7 @@ export default {
       'src/**/*.js',
       'tests/test-util/*.js',
       'tests/fixtures/*.js',
-      'node_modules/@baleada/prose/vue/propsInterfaces.js'
+      'node_modules/@baleada/prose-vue/lib/propsInterfaces.js'
     ],
     testOptions: {
       presets: [

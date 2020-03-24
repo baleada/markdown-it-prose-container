@@ -89,3 +89,4 @@ sw.*
 # Published version
 markdown-it
 !src/markdown-it
+!tests/markdown-it
