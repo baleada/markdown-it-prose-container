@@ -5,9 +5,15 @@ const writtenNewlineRegexp = new RegExp('\\{2,}n', 'g')
 export default function({ tokens, index, info, containerType, nextToken, propsInterfaces }) {
   switch (containerType) {
   case 'ProseCodeblock':
-    return { lines: tokens[index + 1].content.replace(writtenNewlineRegexp, '').split('\n').length - 1 }
+    return {
+      ...toProps({ info, containerType, propsInterfaces }),
+      lines: tokens[index + 1].content.replace(writtenNewlineRegexp, '').split('\n').length - 1
+    }
   case 'ProseHeading':
-    return { level: nextToken && Number(nextToken.tag[1]) }
+    return {
+      ...toProps({ info, containerType, propsInterfaces }),
+      level: nextToken && Number(nextToken.tag[1])
+    }
   case 'ProseGrid':
     const tokensAfterTableOpen = tokens.slice(index),
           tableCloseIndex = tokensAfterTableOpen.findIndex(({ type }) => type === 'table_close'),

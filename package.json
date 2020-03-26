@@ -1,6 +1,6 @@
 {
   "name": "@baleada/prose-container",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Markdown-it plugin that allows Baleada Prose components to be used in markdown files.",
   "main": "markdown-it/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "keywords": [
     "baleada",
     "markdown",
-    "Prose container",
+    "prose container",
     "markdown-it plugin"
   ],
   "author": {
@@ -55,8 +55,5 @@
   "dependencies": {
     "@baleada/prepare": "0.0.2",
     "markdown-it-container": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@baleada/prose": "0.x"
   }
 }
