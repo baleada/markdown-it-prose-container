@@ -1,5 +1,5 @@
 import test from 'ava'
-import toBound from '../../src/markdown-it/util/toBound'
+import toBound from '../src/util/toBound'
 
 test.beforeEach(t => {
   t.context.props = {

@@ -1,8 +1,8 @@
 import test from 'ava'
 import MarkdownIt from 'markdown-it'
 import propsInterfaces from '@baleada/prose-vue/lib/propsInterfaces'
-import plugin from '../../src/markdown-it/index.js'
-import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseList, proseSection, blockquote, codeblock, grid, heading, list } from '../fixtures/markdown'
+import plugin from '../src'
+import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseGrid, proseHeading, proseList, proseSection, blockquote, codeblock, grid, heading, list } from './fixtures/markdown'
 
 const md = new MarkdownIt()
 md.use(plugin, { templateType: 'vue', propsInterfaces }) // Vue is hardcoded here because all template formatting is tested in toBound.test.js

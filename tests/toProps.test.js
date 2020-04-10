@@ -1,5 +1,5 @@
 import test from 'ava'
-import toProps from '../../src/markdown-it/util/toProps'
+import toProps from '../src/util/toProps'
 
 const propsInterfaces = [{
   name: 'example',

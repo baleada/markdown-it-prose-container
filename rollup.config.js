@@ -6,12 +6,9 @@ export default {
     'markdown-it-container',
   ],
   input: [
-    'src/markdown-it/index.js',
+    'src/index.js',
   ],
-  output: {
-    dir: 'markdown-it',
-    format: 'esm',
-  },
+  output: { file: 'lib/index.js', format: 'esm' },
   plugins: [
     babel({
       exclude: 'node_modules/**'

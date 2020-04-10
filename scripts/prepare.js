@@ -1,9 +1,10 @@
-const generateIndex = require('./generateIndex'),
-      rollup = require('./rollup')
+const { empty, generateIndex } = require('@baleada/prepare'),
+      compile = require('./compile')
 
 function prepare () {
-  generateIndex('./src/markdown-it/util')
-  rollup('markdown-it')
+  empty('lib')
+  generateIndex('./src/util')
+  compile()
 }
 
 prepare()

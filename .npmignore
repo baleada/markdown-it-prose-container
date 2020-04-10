@@ -2,4 +2,4 @@
 *
 
 # Except these files
-markdown-it
+!lib/**/*.js

@@ -87,6 +87,4 @@ sw.*
 .DS_Store
 
 # Published version
-markdown-it
-!src/markdown-it
-!tests/markdown-it
+lib
