@@ -1,6 +1,6 @@
 {
   "name": "@baleada/markdown-it-prose-container",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Markdown-it plugin that allows Baleada Prose components to be used in markdown files.",
   "main": "lib/index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-private-methods": "^7.6.0",
     "@babel/preset-env": "^7.7.1",
+    "@baleada/prepare": "0.0.2",
     "@baleada/prose-vue": "^0.7.1",
     "@nuxtjs/eslint-config": "^1.1.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
@@ -53,7 +54,6 @@
     "rollup-plugin-babel": "^4.4.0"
   },
   "dependencies": {
-    "@baleada/prepare": "0.0.2",
     "markdown-it-container": "^2.0.0"
   }
 }
