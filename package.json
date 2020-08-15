@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/baleada/markdown-it-prose-container.git"
+    "url": "git+https://github.com/baleada/markdown-it-prose-container.git"
   },
   "keywords": [
     "baleada",
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/baleada/markdown-it-prose-container/issues"
+    "url": "https://github.com/baleada/markdown-it-prose-container/issues"
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
