@@ -1,5 +1,5 @@
 import test from 'ava'
-import toProps from '../src/util/toProps'
+import infoToProps from '../src/util/infoToProps'
 
 const propsInterfaces = [{
   name: 'example',
@@ -12,12 +12,12 @@ const propsInterfaces = [{
 }]
 
 test.before(t => {
-  t.context.toProps = info => toProps({ info, containerType: 'example', propsInterfaces })
+  t.context.infoToProps = info => infoToProps({ info, containerType: 'example' })
 })
 
 test('parses arrays', t => {
   const info = 'array=[one,two]',
-        value = t.context.toProps(info),
+        value = t.context.infoToProps(info),
         expected = {
           array: ['one', 'two']
         }
@@ -30,9 +30,9 @@ test('parses booleans', t => {
         explicitlyFalse = 'boolean=false',
         implicitlyTrue = 'boolean',
         value = {
-          explicitlyTrue: t.context.toProps(explicitlyTrue),
-          explicitlyFalse: t.context.toProps(explicitlyFalse),
-          implicitlyTrue: t.context.toProps(implicitlyTrue),
+          explicitlyTrue: t.context.infoToProps(explicitlyTrue),
+          explicitlyFalse: t.context.infoToProps(explicitlyFalse),
+          implicitlyTrue: t.context.infoToProps(implicitlyTrue),
         },
         expected = {
           explicitlyTrue: { boolean: true },
@@ -57,7 +57,7 @@ test('parses booleans', t => {
 
 test('parses numbers', t => {
   const info = 'number=42',
-        value = t.context.toProps(info),
+        value = t.context.infoToProps(info),
         expected = { number: 42 }
 
   t.deepEqual(value, expected)
@@ -67,9 +67,9 @@ test('parses numbers', t => {
   
 // })
 
-test('parses strings', t => {
+test('parses single word strings with no quotes', t => {
   const info = 'string=baleada',
-        value = t.context.toProps(info),
+        value = t.context.infoToProps(info),
         expected = { string: 'baleada' }
 
   t.deepEqual(value, expected)

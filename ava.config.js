@@ -9,7 +9,8 @@ export default {
       'src/**/*.js',
       'tests/test-util/*.js',
       'tests/fixtures/*.js',
-      'node_modules/@baleada/prose-vue/lib/propsInterfaces.js'
+      'node_modules/@baleada/vue-prose/propsInterfaces.js',
+      'node_modules/@baleada/vue-prose/loopedIdPrefix.js',
     ],
     testOptions: {
       presets: [

@@ -1,10 +1,8 @@
-import { getPreviousToken, replaceTag, toBound } from '../util'
+import { lookupPreviousToken, replaceTag, toBound } from '../util'
 
-const state = {}
-
-export function tableOpen (md) {
+export function tableOpen (md, state) {
   return (tokens, index, options) => {
-    const previousToken = getPreviousToken(tokens, index),
+    const previousToken = lookupPreviousToken({ tokens, index }),
           isProse = previousToken ? previousToken.type === 'container_prose_open' : false,
           defaultTag = md.renderer.renderToken(tokens, index, options)
 
@@ -16,13 +14,17 @@ export function tableOpen (md) {
   }
 }
 
-export function tableDescendant (md, type, isOpen, templateType) {
+export function tableDescendant (md, type, isOpen, templateType, state) {
   return (tokens, index, options) => {
     const isProse = state.isProse,
           receivesProps = isOpen && isProse,
           props = receivesProps && getTableDescendantProps(tokens, index),
-          newTag = receivesProps ? `Prose${type} ${toBound(props, templateType)}` : `Prose${type}`,
+          newTag = receivesProps ? `Prose${type} ${toBound({ props, templateType })}` : `Prose${type}`,
           defaultTag = md.renderer.renderToken(tokens, index, options)
+
+    if (isProse && !isOpen) {
+      state.isProse = false
+    }
 
     return isProse
       ? replaceTag(defaultTag, newTag, isOpen)

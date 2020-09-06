@@ -1,57 +1,38 @@
-import { getPreviousToken, replaceTag, toBound } from '../util'
+import { lookupPreviousToken } from '../util'
 
-const state = {}
-
-export function listOpen (md, isOrdered, templateType) {
+export function root ({ md, isOpen, state }) {
   return (tokens, index, options) => {
-    const previousToken = getPreviousToken(tokens, index),
-          isProse = previousToken ? previousToken.type === 'container_prose_open' : false,
-          receivesProps = isProse,
-          props = receivesProps && { isOrdered },
-          newTag = receivesProps ? `ProseListContents ${toBound(props, templateType)}` : `ProseListContents`,
-          defaultTag = md.renderer.renderToken(tokens, index, options)
+    const defaultTag = md.renderer.renderToken(tokens, index, options)
 
-    state.isProse = isProse
-
-    return isProse
-      ? replaceTag(defaultTag, newTag, true)
-      : defaultTag
-  }
-}
-
-export function listDescendant (md, type, isOpen, templateType) {
-  return (tokens, index, options) => {
-    const isProse = state.isProse,
-          receivesProps = isOpen && isProse,
-          props = receivesProps && getListDescendantProps(tokens, index),
-          newTag = receivesProps ? `Prose${type} ${toBound(props, templateType)}` : `Prose${type}`,
-          defaultTag = md.renderer.renderToken(tokens, index, options)
-
-    return isProse
-      ? replaceTag(defaultTag, newTag, isOpen)
-      : defaultTag
-  }
-}
-
-const listDescendantPropGetters = [
-  {
-    tag: 'li',
-    toProps: (tokens, index) => {
-      const parentDistance = tokens
-        .slice(0, index)
-        .reverse()
-        .filter(({ type }) => ['ordered_list_open', 'bullet_list_open', 'list_item_open'].includes(type))
-        .findIndex(({ type }) => type.startsWith('ordered_list') || type.startsWith('bullet_list'))
-
-      return { index: parentDistance }
+    if (!isOpen) {
+      return state.list.isProse
+        ? ''
+        : defaultTag
     }
-  },
-]
 
-function getListDescendantProps (tokens, index) {
-  const tag = tokens[index].tag,
-        toProps = listDescendantPropGetters.find(({ tag: t }) => t === tag).toProps,
-        props = toProps(tokens, index)
+    const previousToken = lookupPreviousToken({ tokens, index }),
+          isProse = previousToken?.type === 'container_prose_open'
 
-  return props
+    state.list.isProse = isProse
+
+    return isProse
+      ? ''
+      : defaultTag
+  }
+}
+
+export function item ({ md, type, isOpen, state }) {
+  return (tokens, index, options) => {
+    const isProse = state.list.isProse,
+          isItem = type === ''
+          defaultTag = md.renderer.renderToken(tokens, index, options)
+
+    if (!isProse) {
+      return defaultTag
+    }
+
+    return isOpen
+      ? `<template #${loopedIdPrefix}-${itemIndex}>${defaultTag}`
+      : `${defaultTag}</template>`
+  }
 }

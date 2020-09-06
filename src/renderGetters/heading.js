@@ -1,10 +1,8 @@
-import { getPreviousToken, removeTag } from '../util'
+import { lookupPreviousToken, removeTag } from '../util'
 
-const state = {}
-
-export function headingOpen (md) {
+export function headingOpen (md, state) {
   return (tokens, index, options) => {
-    const previousToken = getPreviousToken(tokens, index),
+    const previousToken = lookupPreviousToken({ tokens, index }),
           isProse = previousToken ? previousToken.type === 'container_prose_open' : false,
           defaultTag = md.renderer.renderToken(tokens, index, options)
 
@@ -16,10 +14,14 @@ export function headingOpen (md) {
   }
 }
 
-export function headingClose (md) {
+export function headingClose (md, state) {
   return (tokens, index, options) => {
     const isProse = state.isProse,
           defaultTag = md.renderer.renderToken(tokens, index, options)
+
+    if (isProse) {
+      state.isProse = false
+    }
 
     return isProse
       ? removeTag(defaultTag)

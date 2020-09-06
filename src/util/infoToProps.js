@@ -1,3 +1,5 @@
+import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
+
 const propParsers = {
   array: group => group.replace(/^\[/, '').replace(/\]$/, '').split(','),
   boolean: group => group === undefined || group === 'true',
@@ -9,9 +11,9 @@ const propParsers = {
   string: group => group.replace(/^"/, '').replace(/"$/, ''),
 }
 
-export default function({ info, containerType, propsInterfaces }) {
+export default function({ info, component }) {
   const attributes = info.match(/(\w*?=(".*?"|\w+|\[.*?\])|\w+)/g),
-        propsInterface = propsInterfaces.find(({ name }) => name === containerType).interface
+        propsInterface = propsInterfaces.find(({ name }) => name === component).interface
 
   return attributes === null
     ? {}

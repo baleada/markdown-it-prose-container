@@ -13,7 +13,7 @@ const propsBinders = [
   }
 ]
 
-export default function(props, templateType) {
+export default function({ props, templateType }) {
   return propsBinders
     .find(({ templateType: t }) => t === templateType)
     .toBound(props)

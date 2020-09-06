@@ -25,9 +25,9 @@ details\n\
 :::\
 '
 
-export const proseGrid = '\
+export const proseTable = '\
 :::\n\
-| Prose | Grid |\n\
+| Prose | Table |\n\
 | --- | --- |\n\
 | 0, 0 | 0, 1 |\n\
 | 1, 0 | 1, 1 |\n\
@@ -63,10 +63,10 @@ codeblock\n\
 ```\n\
 '
 
-export const grid = '\
-| Grid |\n\
+export const table = '\
+| Table |\n\
 | --- |\n\
-| grid |\n\
+| table |\n\
 '
 
 export const heading = '\
