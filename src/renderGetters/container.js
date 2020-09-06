@@ -1,4 +1,4 @@
-import { containerMetadataToProps, guessComponent, toBound } from '../util'
+import { containerTokenToProps, guessComponent, toBound } from '../util'
 
 export default function(md, { templateType, state }) {
   return (tokens, index) => {
@@ -9,7 +9,7 @@ export default function(md, { templateType, state }) {
           component = guessComponent({ info, nesting, nextTokenType, state })
 
     if (isOpen) {
-      const props = containerMetadataToProps({ md, tokens, index, info, component, nextToken }),
+      const props = containerTokenToProps({ tokens, index, info, component, nextToken }),
             boundProps = toBound({ props, templateType })
 
       return `<${component} ${boundProps}>\n`

@@ -57,5 +57,8 @@
   },
   "dependencies": {
     "markdown-it-container": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@baleada/logic": ">0.15.19"
   }
 }
