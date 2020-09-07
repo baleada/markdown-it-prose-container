@@ -8,7 +8,7 @@ test(`transforms token to ProseCodeblock's required props`, t => {
           proseContainerTokenStub,
           {
             info: 'js',
-            content: 'console.log(\n`Baleada`\n)'
+            content: 'console.log(\n`Baleada`\n)\n'
           }
         ],
         value = containerTokenToProps({
