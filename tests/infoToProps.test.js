@@ -12,7 +12,7 @@ const propsInterfaces = [{
 }]
 
 test.before(t => {
-  t.context.infoToProps = info => infoToProps({ info, containerType: 'example' })
+  t.context.infoToProps = info => infoToProps({ info, component: 'example', propsInterfaces })
 })
 
 test('parses arrays', t => {
@@ -71,6 +71,22 @@ test('parses single word strings with no quotes', t => {
   const info = 'string=baleada',
         value = t.context.infoToProps(info),
         expected = { string: 'baleada' }
+
+  t.deepEqual(value, expected)
+})
+
+test('parses single word strings with quotes', t => {
+  const info = 'string="baleada"',
+        value = t.context.infoToProps(info),
+        expected = { string: 'baleada' }
+
+  t.deepEqual(value, expected)
+})
+
+test('parses multi word strings with quotes', t => {
+  const info = 'string="Baleada: a toolkit for building web apps"',
+        value = t.context.infoToProps(info),
+        expected = { string: 'Baleada: a toolkit for building web apps' }
 
   t.deepEqual(value, expected)
 })

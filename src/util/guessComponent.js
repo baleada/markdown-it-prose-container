@@ -7,15 +7,17 @@ const componentsByNextTokenType = {
         bullet_list_open: 'ProseList',
       }
 
-export default function guessComponent ({ info, nesting, nextTokenType, state }) {
+export default function guessComponent ({ info, nesting, nextTokenType, cache }) {
   const isOpen = nesting === 1
 
   if (!isOpen) {
-    return state.container.component
+    return cache.container.component
+    // No need to reset cache after processing the close token,
+    // because the next open token will set it appropriately
   }
 
   const component = componentsByNextTokenType[nextTokenType] || toComponent(info)
-  state.container.component = component
+  cache.container.component = component
 
   return component
 }

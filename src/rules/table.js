@@ -1,0 +1,98 @@
+import { clipable } from '@baleada/logic'
+import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
+import { lookupPreviousToken } from '../util'
+
+export function table ({ md, cache, containerName }) {
+  return (tokens, index, options) => {
+    const defaultTag = md.renderer.renderToken(tokens, index, options),
+          isOpen = tokens[index].type.endsWith('open')
+
+    if (!isOpen) {
+      // No need to reset cache after processing the close token,
+      // because the next open token will set it appropriately
+      return cache.table.isInsideProseContainer
+        ? ''
+        : defaultTag
+    }
+
+    const previousToken = lookupPreviousToken({ tokens, index }),
+          isInsideProseContainer = previousToken?.type === `container_${containerName}_open`
+
+    cache.table.isInsideProseContainer = isInsideProseContainer
+
+    return isInsideProseContainer
+      ? ''
+      : defaultTag
+  }
+}
+
+export function tableDescendant ({ md, cache }) {
+  return (tokens, index, options) => {
+    const defaultTag = md.renderer.renderToken(tokens, index, options),
+          isInsideProseContainer = cache.table.isInsideProseContainer,
+          isOpen = tokens[index].type.endsWith('open')
+
+    if (!isInsideProseContainer) {
+      return defaultTag
+    }
+
+    const type = `${clipable(tokens[index].type).clip(/_(open|close)$/)}`
+
+    switch (type) {
+      case 'thead':
+      case 'tbody':
+      case 'tr':
+        return ''
+      case 'th':
+        // IIFE for easier variable name reuse
+        return (() => {
+          if (!isOpen) {
+            return `</div></template>`
+          }          
+      
+          const reverseRowOpenIndex = tokens
+                  .slice(0, index)
+                  .reverse() // Mutates the sliced copy only
+                  .findIndex(({ type }) => type === 'tr_open'),
+                rowOpenIndex = tokens.slice(0, index).length - reverseRowOpenIndex,
+                columnHeaderIndexInRow = tokens
+                  .slice(rowOpenIndex, index)
+                  .filter(({ type }) => type === 'th_open')
+                  .length
+      
+          // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
+          return `<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-${columnHeaderIndexInRow}><div>`
+        })()
+      case 'td':
+        // IIFE for easier variable name reuse
+        return (() => {
+          if (!isOpen) {
+            return `</div></template>`
+          }
+      
+          const reverseBodyOpenIndex = tokens
+                  .slice(0, index)
+                  .reverse() // Mutates the sliced copy only
+                  .findIndex(({ type }) => type === 'tbody_open'),
+                bodyOpenIndex = tokens.slice(0, index).length - reverseBodyOpenIndex,
+                reverseRowOpenIndex = tokens
+                  .slice(0, index)
+                  .reverse() // Mutates the sliced copy only
+                  .findIndex(({ type }) => type === 'tr_open'),
+                rowOpenIndex = tokens.slice(0, index).length - reverseRowOpenIndex,
+                rowIndexInBody = tokens
+                  .slice(bodyOpenIndex, rowOpenIndex)
+                  .filter(({ type }) => type === 'tr_open')
+                  .length - 1, // Don't ask
+                cellIndexInRow = tokens
+                  .slice(rowOpenIndex, index)
+                  .filter(({ type }) => type === 'td_open')
+                  .length
+      
+          // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
+          return `<template #${loopedIdPrefix}-1-${loopedIdPrefix}-${rowIndexInBody}-${loopedIdPrefix}-${cellIndexInRow}><div>`
+        })()
+    }
+  }
+}
+

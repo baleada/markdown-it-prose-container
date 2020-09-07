@@ -1,4 +1,3 @@
-import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
 import { clipable } from '@baleada/logic'
 
 const propParsers = {
@@ -9,10 +8,10 @@ const propParsers = {
   map: group => group,
   number: group => Number(group),
   object: group => group,
-  string: group => clipable(group).clip(/^"/).clip(/"$/),
+  string: group => `${clipable(group).clip(/^"/).clip(/"$/)}`,
 }
 
-export default function({ info, component }) {
+export default function({ info, component, propsInterfaces }) {
   const attributes = info.match(/(\w*?=(".*?"|\w+|\[.*?\])|\w+)/g),
         propsInterface = propsInterfaces.find(({ name }) => name === component).interface
 

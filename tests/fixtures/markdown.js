@@ -12,7 +12,7 @@ export const proseBlockquote = '\
 
 export const proseCodeblock = '\
 :::\n\
-```\n\
+```js\n\
 codeblock\n\
 other line\n\
 ```\n\

@@ -1,13 +1,13 @@
 import test from 'ava'
 import guessComponent from '../src/util/guessComponent'
 
-const stateStub = { container: {} }
+const cacheStub = { container: {} }
 
 test('looks up certain open tokens by next token type', t => {
   const otherParamsStub = {
           info: '',
           nesting: 1,
-          state: { ...stateStub },
+          cache: { ...cacheStub },
         },
         values = [
           guessComponent({ nextTokenType: 'fence', ...otherParamsStub }),
@@ -25,7 +25,7 @@ test('recognizes ProseAside open token', t => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
-          state: { ...stateStub },
+          cache: { ...cacheStub },
         },
         values = [
           guessComponent({ info: 'type="info"', ...otherParamsStub }),
@@ -52,7 +52,7 @@ test('recognizes ProseMedia open tokens', t => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
-          state: { ...stateStub },
+          cache: { ...cacheStub },
         },
         values = [
           guessComponent({ info: 'type="image"', ...otherParamsStub }),
@@ -74,7 +74,7 @@ test('recognizes ProseDetails open tokens', t => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
-          state: { ...stateStub },
+          cache: { ...cacheStub },
         },
         values = [
           guessComponent({ info: 'summary="Baleada: a toolkit for building web apps"', ...otherParamsStub }),
@@ -90,7 +90,7 @@ test('falls back to ProseSection open token', t => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
-          state: { ...stateStub },
+          cache: { ...cacheStub },
         },
         values = [
           guessComponent({ info: 'foo', ...otherParamsStub }),
@@ -101,20 +101,20 @@ test('falls back to ProseSection open token', t => {
   t.assert(values.every(value => value === 'ProseSection'))
 })
 
-test('looks up close token in state', t => {
-  const state = { ...stateStub }
+test('looks up close token in cache', t => {
+  const cache = { ...cacheStub }
   
   const openProseCodeblockStub = {
     nesting: 1,
     info: '',
     nextTokenType: 'fence',
-    state,
+    cache,
   }
   
-  // Pass open token to establish state
+  // Pass open token to establish cache
   guessComponent(openProseCodeblockStub)
 
-  const value = guessComponent({ nesting: -1, info: undefined, nextTokenType: undefined, state }),
+  const value = guessComponent({ nesting: -1, info: undefined, nextTokenType: undefined, cache }),
         expected = 'ProseCodeblock'
         
   t.is(value, expected)

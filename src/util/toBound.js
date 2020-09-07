@@ -1,21 +1,21 @@
 const propsBinders = [
   {
-    templateType: 'jsx',
+    template: 'jsx',
     toBound: props => `{...${singleQuoteStringify(props)}}`
   },
   {
-    templateType: 'vue',
+    template: 'vue',
     toBound: props => `v-bind="${singleQuoteStringify(props)}"`
   },
   {
-    templateType: 'svelte',
+    template: 'svelte',
     toBound: props => `{...${singleQuoteStringify(props)}}`
   }
 ]
 
-export default function({ props, templateType }) {
+export default function({ props, template }) {
   return propsBinders
-    .find(({ templateType: t }) => t === templateType)
+    .find(({ template: t }) => t === template)
     .toBound(props)
 }
 
