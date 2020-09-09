@@ -61,7 +61,7 @@ export function tableDescendant ({ md, cache }) {
                   .length
       
           // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-          return `<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-${columnHeaderIndexInRow}><div>`
+          return `<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-${columnHeaderIndexInRow}="{ ref }"><div :ref="ref">`
         })()
       case 'td':
         // IIFE for easier variable name reuse
@@ -90,7 +90,7 @@ export function tableDescendant ({ md, cache }) {
                   .length
       
           // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-          return `<template #${loopedIdPrefix}-1-${loopedIdPrefix}-${rowIndexInBody}-${loopedIdPrefix}-${cellIndexInRow}><div>`
+          return `<template #${loopedIdPrefix}-1-${loopedIdPrefix}-${rowIndexInBody}-${loopedIdPrefix}-${cellIndexInRow}="{ ref }"><div :ref="ref">`
         })()
     }
   }

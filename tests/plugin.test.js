@@ -60,12 +60,12 @@ test('renders ProseTable', t => {
   const value = md.render(proseTable),
   expected = `\
 <ProseTable v-bind="{'totalBodyRows':2,'totalColumns':2}">\n\
-<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-0><div>Prose</div></template>\
-<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-1><div>Table</div></template>\
-<template #${loopedIdPrefix}-1-${loopedIdPrefix}-0-${loopedIdPrefix}-0><div>0, 0</div></template>\
-<template #${loopedIdPrefix}-1-${loopedIdPrefix}-0-${loopedIdPrefix}-1><div>0, 1</div></template>\
-<template #${loopedIdPrefix}-1-${loopedIdPrefix}-1-${loopedIdPrefix}-0><div>1, 0</div></template>\
-<template #${loopedIdPrefix}-1-${loopedIdPrefix}-1-${loopedIdPrefix}-1><div>1, 1</div></template>\
+<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-0="{ ref }"><div :ref="ref">Prose</div></template>\
+<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-1="{ ref }"><div :ref="ref">Table</div></template>\
+<template #${loopedIdPrefix}-1-${loopedIdPrefix}-0-${loopedIdPrefix}-0="{ ref }"><div :ref="ref">0, 0</div></template>\
+<template #${loopedIdPrefix}-1-${loopedIdPrefix}-0-${loopedIdPrefix}-1="{ ref }"><div :ref="ref">0, 1</div></template>\
+<template #${loopedIdPrefix}-1-${loopedIdPrefix}-1-${loopedIdPrefix}-0="{ ref }"><div :ref="ref">1, 0</div></template>\
+<template #${loopedIdPrefix}-1-${loopedIdPrefix}-1-${loopedIdPrefix}-1="{ ref }"><div :ref="ref">1, 1</div></template>\
 </ProseTable>\n\
 `
 
@@ -86,8 +86,8 @@ test('renders ProseList', t => {
   const value = md.render(proseList),
         expected = `\
 <ProseList v-bind="{'tag':'ol','totalItems':2}">\n\
-<template #${loopedIdPrefix}-0><li>list item</li>\n</template>\
-<template #${loopedIdPrefix}-1><li>also list item</li>\n</template>\
+<template #${loopedIdPrefix}-0="{ ref }"><li :ref="ref">list item</li></template>\
+<template #${loopedIdPrefix}-1="{ ref }"><li :ref="ref">also list item</li></template>\
 </ProseList>\n\
 `
 

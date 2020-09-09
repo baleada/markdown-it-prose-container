@@ -56,14 +56,23 @@ test('recognizes ProseMedia open tokens', t => {
         },
         values = [
           guessComponent({ info: 'type="image"', ...otherParamsStub }),
+          guessComponent({ info: 'type="img"', ...otherParamsStub }),
           guessComponent({ info: 'type="video"', ...otherParamsStub }),
           guessComponent({ info: 'type="audio"', ...otherParamsStub }),
+          guessComponent({ info: 'type="embed"', ...otherParamsStub }),
+          guessComponent({ info: 'type="iframe"', ...otherParamsStub }),
           guessComponent({ info: 'type=image', ...otherParamsStub }),
+          guessComponent({ info: 'type=img', ...otherParamsStub }),
           guessComponent({ info: 'type=video', ...otherParamsStub }),
           guessComponent({ info: 'type=audio', ...otherParamsStub }),
+          guessComponent({ info: 'type=embed', ...otherParamsStub }),
+          guessComponent({ info: 'type=iframe', ...otherParamsStub }),
           guessComponent({ info: '     type="image"', ...otherParamsStub }),
+          guessComponent({ info: '     type="img"', ...otherParamsStub }),
           guessComponent({ info: '     type="video"', ...otherParamsStub }),
           guessComponent({ info: '     type="audio"', ...otherParamsStub }),
+          guessComponent({ info: '     type="embed"', ...otherParamsStub }),
+          guessComponent({ info: '     type="iframe"', ...otherParamsStub }),
         ]
   
   t.assert(values.every(value => value === 'ProseMedia'))

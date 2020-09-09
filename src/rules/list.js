@@ -36,7 +36,7 @@ export function listItem ({ md, cache }) {
     }
 
     if (!isOpen) {
-      return `${defaultTag}</template>`
+      return `</li></template>`
     }
 
     const reverseListOpenIndex = tokens
@@ -50,6 +50,6 @@ export function listItem ({ md, cache }) {
             .length
 
     // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-    return `<template #${loopedIdPrefix}-${itemIndex}>${defaultTag}`
+    return `<template #${loopedIdPrefix}-${itemIndex}="{ ref }"><li :ref="ref">`
   }
 }

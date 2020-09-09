@@ -35,7 +35,7 @@ const componentConditions = [
   },
   {
     name: 'ProseMedia',
-    condition: info => /\s*?(?:type="(?:image|video|audio)"|type=(?:image|video|audio))/.test(info)
+    condition: info => /\s*?(?:type="(?:image|img|video|audio|embed|iframe)"|type=(?:image|img|video|audio|embed|iframe))/.test(info)
   },
   {
     name: 'ProseDetails',
