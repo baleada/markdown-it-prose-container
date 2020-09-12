@@ -2,7 +2,7 @@ import { clipable } from '@baleada/logic'
 
 const propParsers = {
   array: group => clipable(group).clip(/^\[/).clip(/\]$/).split(','),
-  boolean: group => group === undefined || group === 'true',
+  boolean: group => group === undefined || group === 'true' || `${clipable(group).clip(/^"/).clip(/"$/)}` === 'true',
   date: group => group,
   'function': group => group,
   map: group => group,

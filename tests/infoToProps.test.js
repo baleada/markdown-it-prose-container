@@ -28,15 +28,21 @@ test('parses arrays', t => {
 test('parses booleans', t => {
   const explicitlyTrue = 'boolean=true',
         explicitlyFalse = 'boolean=false',
+        explicitlyTrueWithQuotes = 'boolean="true"',
+        explicitlyFalseWithQuotes = 'boolean="false"',
         implicitlyTrue = 'boolean',
         value = {
           explicitlyTrue: t.context.infoToProps(explicitlyTrue),
           explicitlyFalse: t.context.infoToProps(explicitlyFalse),
+          explicitlyTrueWithQuotes: t.context.infoToProps(explicitlyTrueWithQuotes),
+          explicitlyFalseWithQuotes: t.context.infoToProps(explicitlyFalseWithQuotes),          
           implicitlyTrue: t.context.infoToProps(implicitlyTrue),
         },
         expected = {
           explicitlyTrue: { boolean: true },
           explicitlyFalse: { boolean: false },
+          explicitlyTrueWithQuotes: { boolean: true },
+          explicitlyFalseWithQuotes: { boolean: false },
           implicitlyTrue: { boolean: true },
         }
 
