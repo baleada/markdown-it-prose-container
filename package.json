@@ -37,7 +37,6 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.7.1",
     "@baleada/prepare": "0.0.2",
-    "@baleada/prose-vue": "^0.7.1",
     "@nuxtjs/eslint-config": "^1.1.2",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-node-resolve": "^7.1.1",
@@ -59,7 +58,7 @@
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {
-    "@baleada/logic": ">0.15.19",
+    "@baleada/logic": ">=0.15.19",
     "@baleada/vue-prose": ">=0.9.0"
   }
 }
