@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import plugin from '../src'
 import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseList, proseSection, blockquote, codeblock, table, heading, list } from './fixtures/markdown'
 
-const md = new MarkdownIt()
+const md = new MarkdownIt({ html: true })
 md.use(plugin, { template: 'vue' }) // Vue is hardcoded here because other templates are not yet fully supported
 
 test('renders ProseAside', t => {

@@ -25,7 +25,7 @@ const containerTokenToPropsByComponent = {
   ProseTable: ({ tokens, index, info, component }) => {
     const rootAndDescendantTokens = tokens.slice(
             index + 1, // table_open token
-            tokens.findIndex(({ type }) => type === 'table_close') // This excludes the close token. Not a problem, because the close token isn't needed.
+            index + tokens.slice(index + 1).findIndex(({ type }) => type === 'table_close') // This excludes the close token. Not a problem, because the close token isn't needed.
           ),
           totalBodyRows = rootAndDescendantTokens
             .filter(({ type }) => type === 'tr_open')
@@ -43,14 +43,13 @@ const containerTokenToPropsByComponent = {
   ProseList: ({ tokens, index, info, component }) => {
     const rootAndDescendantTokens = tokens.slice(
             index + 1, // ordered_list_open or bullet_list_open token
-            tokens.findIndex(({ type }) => ['ordered_list_close', 'bullet_list_close'].includes(type)) // This excludes the close token. Not a problem, because the close token isn't needed.
+            index + tokens.slice(index).findIndex(token => ['ordered_list_close', 'bullet_list_close'].includes(token.type)) // This slice excludes the close token. Not a problem, because the close token isn't needed.
           ),
-          tag = (rootAndDescendantTokens[0].type === 'ordered_list_open' && 'ol') ||
-                (rootAndDescendantTokens[0].type === 'bullet_list_open' && 'ul'),
+          { tag } = rootAndDescendantTokens[0],
           totalItems = tokens
             .filter(({ type }) => type === 'list_item_open')
             .length
-
+            
     return {
       ...infoToProps({ info, component, propsInterfaces }),
       tag,

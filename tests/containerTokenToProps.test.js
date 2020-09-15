@@ -109,7 +109,7 @@ test(`transforms token to ProseList's required props`, t => {
   const tokens = [
           proseContainerTokenStub,
           // Tokens stub generated on https://markdown-it.github.io/
-          { type: 'bullet_list_open' },
+          { type: 'bullet_list_open', tag: 'ul' },
           { type: 'list_item_open' },
           { type: 'paragraph_open' },
           { type: 'inline' },

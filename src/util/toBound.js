@@ -1,22 +1,11 @@
-const propsBinders = [
-  {
-    template: 'jsx',
-    toBound: props => `{...${singleQuoteStringify(props)}}`
-  },
-  {
-    template: 'vue',
-    toBound: props => `v-bind="${singleQuoteStringify(props)}"`
-  },
-  {
-    template: 'svelte',
-    toBound: props => `{...${singleQuoteStringify(props)}}`
-  }
-]
+export default function toBound ({ props, template }) {
+  return toBoundByTemplate[template](props)
+}
 
-export default function({ props, template }) {
-  return propsBinders
-    .find(({ template: t }) => t === template)
-    .toBound(props)
+const toBoundByTemplate = {
+  jsx: props => `{...${singleQuoteStringify(props)}}`,
+  vue: props => `v-bind="${singleQuoteStringify(props)}"`,
+  svelte: props => `{...${singleQuoteStringify(props)}}`,
 }
 
 function singleQuoteStringify (props) {
