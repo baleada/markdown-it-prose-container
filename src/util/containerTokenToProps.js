@@ -1,5 +1,5 @@
 import { clipable } from '@baleada/logic'
-import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
+import propsInterfaces from '@baleada/vue-prose/propsInterfaces/index.esm'
 import infoToProps from './infoToProps'
 
 // tokens and index can be used to derive all the other parameters, but they're passed in here for convenience

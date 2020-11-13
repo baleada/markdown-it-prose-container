@@ -1,4 +1,4 @@
-import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
+import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix/index.esm'
 import { lookupPreviousToken } from '../util'
 
 export function list ({ md, cache, containerName }) {

@@ -3,8 +3,9 @@
   "version": "0.7.2",
   "description": "Markdown-it plugin that allows Baleada Prose components to be used in markdown files.",
   "main": "lib/index.js",
+  "module": "lib/index.esm.js",
   "scripts": {
-    "prepare": "node scripts/prepare.js",
+    "prepare": "node scripts/prepare.js && rollup --config rollup.config.js",
     "test": "ava"
   },
   "repository": {
@@ -37,9 +38,11 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.7.1",
     "@baleada/prepare": "0.0.2",
+    "@baleada/rollup-plugin-virtual": "^0.0.5",
+    "@baleada/source-transform-files-to-index": "^0.2.2",
     "@nuxtjs/eslint-config": "^1.1.2",
     "@rollup/plugin-babel": "^5.2.0",
-    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "ava": "^3.12.1",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.4.1",
@@ -52,13 +55,16 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "markdown-it": "^10.0.0",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "rollup": "^2.33.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
+    "@baleada/logic": "^0.15.20",
+    "@baleada/vue-prose": "^0.12.0",
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {
-    "@baleada/logic": ">=0.15.19",
-    "@baleada/vue-prose": ">=0.9.0"
+    "markdown-it": "^12.0.2"
   }
 }

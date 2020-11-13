@@ -1,5 +1,10 @@
 import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import virtual from '@baleada/rollup-plugin-virtual'
+import createFilesToIndex from '@baleada/source-transform-files-to-index'
+
+const utilIndexTest = ({ id }) => /src\/util\/[^\/]+.(?:js|vue)$/.test(id),
+      utilFilesToIndex = createFilesToIndex({ test: utilIndexTest })
 
 export default {
   external: [
@@ -8,18 +13,20 @@ export default {
     /@baleada\/vue-prose/,
     /@babel\/runtime/,
   ],
-  input: [
-    'src/index.js',
-  ],
+  input: 'src/index.js',
   output: [
     { file: 'lib/index.js', format: 'cjs' },
     { file: 'lib/index.esm.js', format: 'esm' },
   ],
   plugins: [
+    nodeResolve(),
+    virtual({
+      test: ({ id }) => id.endsWith('src/util'),
+      transform: utilFilesToIndex,
+    }),
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'runtime',
     }),
-    resolve(),
   ]
 }

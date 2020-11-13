@@ -1,10 +1,7 @@
-const { empty, generateIndex } = require('@baleada/prepare'),
-      compile = require('./compile')
+const { empty } = require('@baleada/prepare')
 
 function prepare () {
   empty('lib')
-  generateIndex('./src/util')
-  compile()
 }
 
 prepare()
