@@ -2,7 +2,7 @@ import test from 'ava'
 import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
 import MarkdownIt from 'markdown-it'
 
-import plugin from '../src'
+import plugin from '../lib/index.esm'
 import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseList, proseSection, blockquote, codeblock, table, heading, list } from './fixtures/markdown'
 
 const md = new MarkdownIt({ html: true })

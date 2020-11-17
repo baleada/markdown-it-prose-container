@@ -6,11 +6,11 @@ export default {
   ],
   babel: {
     compileAsTests: [
+      'lib/**/*.js',
       'src/**/*.js',
       'tests/test-util/*.js',
       'tests/fixtures/*.js',
-      'node_modules/@baleada/vue-prose/propsInterfaces.js',
-      'node_modules/@baleada/vue-prose/loopedIdPrefix.js',
+      'node_modules/**/*.js',
     ],
     testOptions: {
       presets: [
