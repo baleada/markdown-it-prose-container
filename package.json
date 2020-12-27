@@ -43,7 +43,7 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@baleada/logic": "^0.16.2",
-    "@baleada/vue-prose": "^0.13.1",
+    "@baleada/vue-prose": "^0.13.2",
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {
