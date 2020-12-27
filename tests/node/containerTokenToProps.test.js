@@ -1,9 +1,12 @@
-import test from 'ava'
-import containerTokenToProps from '../src/util/containerTokenToProps'
+import { suite as createSuite } from 'uvu'
+import * as assert from 'uvu/assert'
+import containerTokenToProps from '../../src/util/containerTokenToProps.js'
+
+const suite = createSuite('containerTokenToProps (node)')
 
 const proseContainerTokenStub = {}
 
-test(`transforms token to ProseCodeblock's required props`, t => {
+suite(`transforms token to ProseCodeblock's required props`, context => {
   const tokens = [
           proseContainerTokenStub,
           {
@@ -23,10 +26,10 @@ test(`transforms token to ProseCodeblock's required props`, t => {
           lines: 3
         }
 
-  t.deepEqual(value, expected)
+  assert.equal(value, expected)
 })
 
-test(`transforms token to ProseHeading's required props`, t => {
+suite(`transforms token to ProseHeading's required props`, context => {
   const tokens = [
     proseContainerTokenStub,
     {
@@ -44,10 +47,10 @@ test(`transforms token to ProseHeading's required props`, t => {
     level: 1,
   }
 
-t.deepEqual(value, expected)
+  assert.equal(value, expected)
 })
 
-test(`transforms token to ProseTable's required props`, t => {
+suite(`transforms token to ProseTable's required props`, context => {
   const tokens = [
           proseContainerTokenStub,
           // Tokens stub generated on https://markdown-it.github.io/
@@ -102,10 +105,10 @@ test(`transforms token to ProseTable's required props`, t => {
           totalColumns: 2,
         }
   
-  t.deepEqual(value, expected)
+  assert.equal(value, expected)
 })
 
-test(`transforms token to ProseList's required props`, t => {
+suite(`transforms token to ProseList's required props`, context => {
   const tokens = [
           proseContainerTokenStub,
           // Tokens stub generated on https://markdown-it.github.io/
@@ -134,7 +137,9 @@ test(`transforms token to ProseList's required props`, t => {
           totalItems: 2,
         }
   
-  t.deepEqual(value, expected)
+  assert.equal(value, expected)
 })
 
 // Non-required props are handled by infoToProps, which is tested separately
+
+suite.run()

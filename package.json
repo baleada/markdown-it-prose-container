@@ -2,11 +2,17 @@
   "name": "@baleada/markdown-it-prose-container",
   "version": "0.7.3",
   "description": "Markdown-it plugin that allows Baleada Prose components to be used in markdown files.",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "type": "module",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
+  "exports": {
+    "require": "./lib/index.cjs",
+    "import": "./lib/index.js"
+  },
   "scripts": {
-    "prepare": "node scripts/prepare.js && rollup --config rollup.config.js",
-    "test": "ava"
+    "prepare": "rollup --config rollup.config.js",
+    "test:only": "run() { npx uvu tests/$2 $1.test.js$; }; run",
+    "test": "npm run test:only ."
   },
   "repository": {
     "type": "git",
@@ -29,43 +35,18 @@
   },
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
-    "@ava/babel": "^1.0.1",
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
-    "@babel/plugin-proposal-private-methods": "^7.6.0",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.7.1",
-    "@baleada/prepare": "0.0.2",
-    "@baleada/rollup-plugin-virtual": "^0.0.5",
-    "@baleada/source-transform-files-to-index": "^0.2.2",
-    "@nuxtjs/eslint-config": "^1.1.2",
-    "@rollup/plugin-babel": "^5.2.0",
-    "@rollup/plugin-node-resolve": "^10.0.0",
-    "ava": "^3.13.0",
-    "babel-eslint": "^10.0.3",
-    "core-js": "^3.4.1",
-    "cypress": "^5.6.0",
-    "eslint": "^6.6.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-ava": "^9.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-nuxt": "^0.5.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "markdown-it": "^10.0.0",
-    "regenerator-runtime": "^0.13.3",
-    "rollup": "^2.33.1"
+    "@baleada/prepare": "^0.4.15",
+    "markdown-it": "12.0.4",
+    "rollup": "^2.35.1",
+    "uvu": "^0.5.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@baleada/logic": "^0.15.20",
-    "@baleada/vue-prose": "^0.12.0",
+    "@baleada/logic": "^0.16.2",
+    "@baleada/vue-prose": "^0.13.1",
     "markdown-it-container": "^2.0.0"
   },
   "peerDependencies": {
-    "markdown-it": "^12.0.2"
+    "markdown-it": "^12.0.4"
   }
 }

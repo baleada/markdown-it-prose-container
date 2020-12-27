@@ -1,6 +1,6 @@
 import { clipable } from '@baleada/logic'
-import propsInterfaces from '@baleada/vue-prose/propsInterfaces/index.esm'
-import infoToProps from './infoToProps'
+import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
+import infoToProps from './infoToProps.js'
 
 // tokens and index can be used to derive all the other parameters, but they're passed in here for convenience
 export default function containerTokenToProps ({ tokens, index, info, component, nextToken }) {

@@ -1,9 +1,12 @@
-import test from 'ava'
-import guessComponent from '../src/util/guessComponent'
+import { suite as createSuite } from 'uvu'
+import * as assert from 'uvu/assert'
+import guessComponent from '../../src/util/guessComponent.js'
+
+const suite = createSuite('guessComponent (node)')
 
 const cacheStub = { container: {} }
 
-test('looks up certain open tokens by next token type', t => {
+suite('looks up certain open tokens by next token type', context => {
   const otherParamsStub = {
           info: '',
           nesting: 1,
@@ -18,10 +21,10 @@ test('looks up certain open tokens by next token type', t => {
           guessComponent({ nextTokenType: 'bullet_list_open', ...otherParamsStub }),
         ]
   
-  t.assert(values.every(value => !!value))
+  assert.ok(values.every(value => !!value))
 })
 
-test('recognizes ProseAside open token', t => {
+suite('recognizes ProseAside open token', context => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
@@ -45,10 +48,10 @@ test('recognizes ProseAside open token', t => {
           guessComponent({ info: '     type="simple"', ...otherParamsStub }),
         ]
   
-  t.assert(values.every(value => value === 'ProseAside'))
+  assert.ok(values.every(value => value === 'ProseAside'))
 })
 
-test('recognizes ProseMedia open tokens', t => {
+suite('recognizes ProseMedia open tokens', context => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
@@ -75,11 +78,11 @@ test('recognizes ProseMedia open tokens', t => {
           guessComponent({ info: '     type="iframe"', ...otherParamsStub }),
         ]
   
-  t.assert(values.every(value => value === 'ProseMedia'))
+  assert.ok(values.every(value => value === 'ProseMedia'))
 
 })
 
-test('recognizes ProseDetails open tokens', t => {
+suite('recognizes ProseDetails open tokens', context => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
@@ -92,10 +95,10 @@ test('recognizes ProseDetails open tokens', t => {
           guessComponent({ info: '     summary=Baleada', ...otherParamsStub }),
         ]
   
-  t.assert(values.every(value => value === 'ProseDetails'))
+  assert.ok(values.every(value => value === 'ProseDetails'))
 })
 
-test('falls back to ProseSection open token', t => {
+suite('falls back to ProseSection open token', context => {
   const otherParamsStub = {
           nesting: 1,
           nextTokenType: 'stub',
@@ -107,10 +110,10 @@ test('falls back to ProseSection open token', t => {
           guessComponent({ info: 'baz', ...otherParamsStub }),
         ]
   
-  t.assert(values.every(value => value === 'ProseSection'))
+  assert.ok(values.every(value => value === 'ProseSection'))
 })
 
-test('looks up close token in cache', t => {
+suite('looks up close token in cache', context => {
   const cache = { ...cacheStub }
   
   const openProseCodeblockStub = {
@@ -126,5 +129,9 @@ test('looks up close token in cache', t => {
   const value = guessComponent({ nesting: -1, info: undefined, nextTokenType: undefined, cache }),
         expected = 'ProseCodeblock'
         
-  t.is(value, expected)
+  assert.is(value, expected)
 })
+
+suite.run()
+
+

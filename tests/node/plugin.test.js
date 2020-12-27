@@ -1,14 +1,17 @@
-import test from 'ava'
+import { suite as createSuite } from 'uvu'
+import * as assert from 'uvu/assert'
 import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
 import MarkdownIt from 'markdown-it'
 
-import plugin from '../lib/index.esm'
-import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseList, proseSection, blockquote, codeblock, table, heading, list } from './fixtures/markdown'
+import plugin from '../../lib/index.js'
+import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseList, proseSection, blockquote, codeblock, table, heading, list } from '../fixtures/markdown.js'
+
+const suite = createSuite('plugin (node)')
 
 const md = new MarkdownIt({ html: true })
 md.use(plugin, { template: 'vue' }) // Vue is hardcoded here because other templates are not yet fully supported
 
-test('renders ProseAside', t => {
+suite('renders ProseAside', context => {
   const value = md.render(proseAside),
         expected = `\
 <ProseAside v-bind="{'type':'info'}">\n\
@@ -16,10 +19,10 @@ test('renders ProseAside', t => {
 </ProseAside>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseBlockquote', t => {
+suite('renders ProseBlockquote', context => {
   const value = md.render(proseBlockquote),
         expected = `\
 <ProseBlockquote v-bind="{}">\n\
@@ -29,10 +32,10 @@ test('renders ProseBlockquote', t => {
 </ProseBlockquote>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseCodeblock', t => {
+suite('renders ProseCodeblock', context => {
   const value = md.render(proseCodeblock),
         expected = `\
 <ProseCodeblock v-bind="{'lang':'js','lines':2}">\n\
@@ -42,10 +45,10 @@ other line\n\
 </ProseCodeblock>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseDetails', t => {
+suite('renders ProseDetails', context => {
   const value = md.render(proseDetails),
         expected = `\
 <ProseDetails v-bind="{'summary':'summary'}">\n\
@@ -53,10 +56,10 @@ test('renders ProseDetails', t => {
 </ProseDetails>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseTable', t => {
+suite('renders ProseTable', context => {
   const value = md.render(proseTable),
   expected = `\
 <ProseTable v-bind="{'totalBodyRows':2,'totalColumns':2}">\n\
@@ -69,20 +72,20 @@ test('renders ProseTable', t => {
 </ProseTable>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseHeading', t => {
+suite('renders ProseHeading', context => {
   const value = md.render(proseHeading),
         expected = `\
 <ProseHeading v-bind="{'level':1}">\n\
 Heading</ProseHeading>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseList', t => {
+suite('renders ProseList', context => {
   const value = md.render(proseList),
         expected = `\
 <ProseList v-bind="{'tag':'ol','totalItems':2}">\n\
@@ -91,10 +94,10 @@ test('renders ProseList', t => {
 </ProseList>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders ProseSection', t => {
+suite('renders ProseSection', context => {
   const value = md.render(proseSection),
         expected = `\
 <ProseSection v-bind="{}">\n\
@@ -102,10 +105,10 @@ test('renders ProseSection', t => {
 </ProseSection>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders blockquote', t => {
+suite('renders blockquote', context => {
   const value = md.render(blockquote),
         expected = `\
 <blockquote>\n\
@@ -113,20 +116,20 @@ test('renders blockquote', t => {
 </blockquote>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders codeblock', t => {
+suite('renders codeblock', context => {
   const value = md.render(codeblock),
         expected = `\
 <pre><code>codeblock\n\
 </code></pre>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders table', t => {
+suite('renders table', context => {
   const value = md.render(table),
         expected = `\
 <table>\n\
@@ -143,19 +146,19 @@ test('renders table', t => {
 </table>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders heading', t => {
+suite('renders heading', context => {
   const value = md.render(heading),
         expected = `\
 <h1>Heading</h1>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
 
-test('renders list', t => {
+suite('renders list', context => {
   const value = md.render(list),
         expected = `\
 <ul>\n\
@@ -163,5 +166,7 @@ test('renders list', t => {
 </ul>\n\
 `
 
-  t.is(value, expected)
+  assert.is(value, expected)
 })
+
+suite.run()
