@@ -1,14 +1,24 @@
-import { clipable } from '@baleada/logic'
-
 const propParsers = {
-  array: group => clipable(group).clip(/^\[/).clip(/\]$/).split(','),
-  boolean: group => group === undefined || group === 'true' || `${clipable(group).clip(/^"/).clip(/"$/)}` === 'true',
+  array: group => group
+    .replace(/^\[/, '')
+    .replace(/\]$/, '')
+    .split(','),
+  boolean: group => 
+    group === undefined
+    ||
+    group === 'true'
+    ||
+    group
+      .replace(/^"/, '')
+      .replace(/"$/, '') === 'true',
   date: group => group,
   'function': group => group,
   map: group => group,
   number: group => Number(group),
   object: group => group,
-  string: group => `${clipable(group).clip(/^"/).clip(/"$/)}`,
+  string: group => group
+    .replace(/^"/, '')
+    .replace(/"$/, ''),
 }
 
 export default function({ info, component, propsInterfaces }) {

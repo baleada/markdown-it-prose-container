@@ -1,4 +1,3 @@
-import { clipable } from '@baleada/logic'
 import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
 import { lookupPreviousToken } from '../util'
 
@@ -36,7 +35,7 @@ export function tableDescendant ({ md, cache }) {
       return defaultTag
     }
 
-    const type = `${clipable(tokens[index].type).clip(/_(open|close)$/)}`
+    const type = tokens[index].type.replace(/_(open|close)$/, '')
 
     switch (type) {
       case 'thead':

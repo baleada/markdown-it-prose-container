@@ -4,7 +4,6 @@ const shared = configureable('rollup')
         .input('src/index.js')
         .external([
           'markdown-it-container',
-          '@baleada/logic',
           /@baleada\/vue-prose/,
         ])
         .resolve()

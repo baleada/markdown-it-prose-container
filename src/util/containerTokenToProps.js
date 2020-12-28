@@ -1,4 +1,3 @@
-import { clipable } from '@baleada/logic'
 import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
 import infoToProps from './infoToProps.js'
 
@@ -16,7 +15,7 @@ const containerTokenToPropsByComponent = {
   ProseCodeblock: ({ tokens, index, info, component }) => ({
     ...infoToProps({ info, component, propsInterfaces }),
     lang: tokens[index + 1].info,
-    lines: clipable(tokens[index + 1].content).clip(userEnteredNewlineRE).split('\n').length - 1
+    lines: tokens[index + 1].content.replace(userEnteredNewlineRE, '').split('\n').length - 1
   }),
   ProseHeading: ({ info, component, nextToken }) => ({
     ...infoToProps({ info, component, propsInterfaces }),
