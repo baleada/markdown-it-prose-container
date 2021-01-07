@@ -1,15 +1,15 @@
-import { containerTokenToProps, guessComponent, toBound } from '../util'
+import { containerTokenToProps, toInferred, toBound } from '../util'
 
-export default function(md, { template, cache }) {
+export default function(md, { template, cache, containerType }) {
   return (tokens, index) => {
     const { info, nesting } = tokens[index],
           isOpen = nesting === 1,
           nextToken = tokens[index + 1],
           nextTokenType = nextToken?.type,
-          component = guessComponent({ info, nesting, nextTokenType, cache })
+          component = toInferred({ info, nesting, nextTokenType, cache })
 
     if (isOpen) {
-      const props = containerTokenToProps({ tokens, index, info, component, nextToken }),
+      const props = containerTokenToProps({ tokens, index, info, component, nextToken, containerType }),
             boundProps = toBound({ props, template })
 
       return `<${component} ${boundProps}>\n`

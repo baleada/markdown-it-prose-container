@@ -40,6 +40,11 @@ export const proseHeading = '\
 :::\
 '
 
+export const proseMedia = '\
+::: ariaLabel="Panama cortado" type=image src="https://res.cloudinary.com/duib7ae0a/image/upload/q_auto,f_auto,w_1500/alex-vipond/panama-cortado.jpg"\n\
+:::\
+'
+
 export const proseList = '\
 :::\n\
 1. list item\n\

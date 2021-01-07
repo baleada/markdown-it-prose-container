@@ -2,10 +2,10 @@ import propsInterfaces from '@baleada/vue-prose/propsInterfaces'
 import infoToProps from './infoToProps.js'
 
 // tokens and index can be used to derive all the other parameters, but they're passed in here for convenience
-export default function containerTokenToProps ({ tokens, index, info, component, nextToken }) {
+export default function containerTokenToProps ({ tokens, index, info, component, nextToken, containerType }) {
   return (
     // Certain components derive props from other tokens and need special treatment.
-    containerTokenToPropsByComponent?.[component]?.({ tokens, index, info, component, nextToken }) ||
+    containerTokenToPropsByComponent?.[component]?.({ tokens, index, info, component, nextToken, containerType }) ||
     // All other components derive props from token info
     infoToProps({ info, component, propsInterfaces })
   )
@@ -17,9 +17,14 @@ const containerTokenToPropsByComponent = {
     lang: tokens[index + 1].info,
     lines: tokens[index + 1].content.replace(userEnteredNewlineRE, '').split('\n').length - 1
   }),
-  ProseHeading: ({ info, component, nextToken }) => ({
+  ProseHeading: ({ tokens, index, info, component, nextToken }) => ({
     ...infoToProps({ info, component, propsInterfaces }),
-    level: Number(nextToken?.tag.match(/\d$/))
+    level: Number(nextToken?.tag.match(/\d$/)),
+    isFirst: !tokens.slice(0, index).some(({ type }) => type === 'heading_open')
+  }),
+  ProseMedia: ({ tokens, index, info, component, containerType }) => ({
+    ...infoToProps({ info, component, propsInterfaces }),
+    isFirst: !tokens.slice(0, index).some(({ type, info }) => type === containerType && mediaREs.some(re => re.test(info)))
   }),
   ProseTable: ({ tokens, index, info, component }) => {
     const rootAndDescendantTokens = tokens.slice(
@@ -60,3 +65,6 @@ const containerTokenToPropsByComponent = {
 // User-entered newlines in a codeblock should be removed
 // before splitting the code by \n to count lines
 const userEnteredNewlineRE = new RegExp('\\{2,}n', 'g')
+
+const mediaREs = ['image', 'img', 'audio', 'video', 'embed', 'iframe']
+  .map(medium => new RegExp(`(?:type=${medium}|type="${medium}"|type='${medium}')`))

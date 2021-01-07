@@ -1,4 +1,4 @@
-const componentsByNextTokenType = {
+const inferredByNextTokenType = {
         fence: 'ProseCodeblock',
         heading_open: 'ProseHeading',
         table_open: 'ProseTable',
@@ -7,7 +7,7 @@ const componentsByNextTokenType = {
         bullet_list_open: 'ProseList',
       }
 
-export default function guessComponent ({ info, nesting, nextTokenType, cache }) {
+export default function toInferred ({ info, nesting, nextTokenType, cache }) {
   const isOpen = nesting === 1
 
   if (!isOpen) {
@@ -16,14 +16,14 @@ export default function guessComponent ({ info, nesting, nextTokenType, cache })
     // because the next open token will set it appropriately
   }
 
-  const component = componentsByNextTokenType[nextTokenType] || toComponent(info)
-  cache.container.component = component
+  const inferred = inferredByNextTokenType[nextTokenType] || fromInfo(info)
+  cache.container.component = inferred
 
-  return component
+  return inferred
 }
 
 
-function toComponent (info) {
+function fromInfo (info) {
   const component = componentConditions.find(({ condition }) => condition(info))
   return component?.name || 'ProseSection'
 }

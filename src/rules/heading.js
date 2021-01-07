@@ -1,6 +1,6 @@
 import { lookupPreviousToken } from '../util'
 
-export function heading ({ md, cache, containerName }) {
+export function heading ({ md, cache, containerType }) {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isOpen = tokens[index].type.endsWith('open')
@@ -14,7 +14,7 @@ export function heading ({ md, cache, containerName }) {
     }
     
     const previousToken = lookupPreviousToken({ tokens, index }),
-          isInsideProseContainer = previousToken?.type === `container_${containerName}_open`
+          isInsideProseContainer = previousToken?.type === containerType
 
     cache.heading.isInsideProseContainer = isInsideProseContainer
 

@@ -4,7 +4,7 @@ import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
 import MarkdownIt from 'markdown-it'
 
 import plugin from '../../lib/index.js'
-import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseList, proseSection, blockquote, codeblock, table, heading, list } from '../fixtures/markdown.js'
+import { proseAside, proseBlockquote, proseCodeblock, proseDetails, proseTable, proseHeading, proseMedia, proseList, proseSection, blockquote, codeblock, table, heading, list } from '../fixtures/markdown.js'
 
 const suite = createSuite('plugin (node)')
 
@@ -78,8 +78,18 @@ suite('renders ProseTable', context => {
 suite('renders ProseHeading', context => {
   const value = md.render(proseHeading),
         expected = `\
-<ProseHeading v-bind="{'level':1}">\n\
+<ProseHeading v-bind="{'level':1,'isFirst':true}">\n\
 Heading</ProseHeading>\n\
+`
+
+  assert.is(value, expected)
+})
+
+suite('renders ProseMedia', context => {
+  const value = md.render(proseMedia),
+        expected = `\
+<ProseMedia v-bind="{'ariaLabel':'Panama cortado','type':'image','src':'https://res.cloudinary.com/duib7ae0a/image/upload/q_auto,f_auto,w_1500/alex-vipond/panama-cortado.jpg','isFirst':true}">\n\
+</ProseMedia>\n\
 `
 
   assert.is(value, expected)

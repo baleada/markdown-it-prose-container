@@ -33,22 +33,24 @@ export default function(md, required = {}, options = {}) {
           heading: {},
           list: {},
           table: {},
-        }
+        },
+        containerType = `container_${name}_open`
 
   md.use(MarkdownItContainer, name, {
     marker,
     validate: () => true,
-    render: container(md, { template, cache }),
+    render: container(md, { template, cache, containerType }),
   })
 
+
   // Headings
-  md.renderer.rules.heading_open = heading({ md, cache, containerName: name })
+  md.renderer.rules.heading_open = heading({ md, cache, containerType })
   md.renderer.rules.heading_close = heading({ md, cache })
 
   // Lists
-  md.renderer.rules.ordered_list_open = list({ md, cache, containerName: name })
+  md.renderer.rules.ordered_list_open = list({ md, cache, containerType })
   md.renderer.rules.ordered_list_close = list({ md, cache })
-  md.renderer.rules.bullet_list_open = list({ md, cache, containerName: name })
+  md.renderer.rules.bullet_list_open = list({ md, cache, containerType })
   md.renderer.rules.bullet_list_close = list({ md, cache })
   md.renderer.rules.list_item_open = listItem({ md, cache })
   md.renderer.rules.list_item_close = listItem({ md, cache })
