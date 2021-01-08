@@ -1,7 +1,7 @@
 import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
 import { lookupPreviousToken } from '../util'
 
-export function list ({ md, cache, containerName }) {
+export function list ({ md, cache, containerType }) {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isOpen = tokens[index].type.endsWith('open')
@@ -15,7 +15,7 @@ export function list ({ md, cache, containerName }) {
     }
 
     const previousToken = lookupPreviousToken({ tokens, index }),
-          isInsideProseContainer = previousToken?.type === `container_${containerName}_open`
+          isInsideProseContainer = previousToken?.type === containerType
 
     cache.list.isInsideProseContainer = isInsideProseContainer
 
