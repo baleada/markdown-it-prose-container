@@ -1,6 +1,16 @@
-import { containerTokenToProps, toInferred, toBound } from '../util'
+import type MarkdownIt from 'markdown-it'
+import type { RenderRule } from 'markdown-it/lib/renderer'
+import type { Options, Cache } from '../createMarkdownItProseContainer'
+import { containerTokenToProps, toInferred, toBound } from '../extracted'
 
-export default function(md, { template, cache, containerType }) {
+export function container (
+  md: MarkdownIt,
+  { template, cache, containerType }: {
+    template: Options['template'],
+    cache: Cache,
+    containerType: string,
+  }
+): RenderRule {
   return (tokens, index) => {
     const { info, nesting } = tokens[index],
           isOpen = nesting === 1,

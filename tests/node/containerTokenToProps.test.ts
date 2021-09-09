@@ -1,6 +1,7 @@
+import type Token from 'markdown-it/lib/token'
 import { suite as createSuite } from 'uvu'
 import * as assert from 'uvu/assert'
-import containerTokenToProps from '../../src/util/containerTokenToProps.js'
+import { containerTokenToProps } from '../../src/extracted'
 
 const suite = createSuite('containerTokenToProps (node)')
 
@@ -14,13 +15,13 @@ suite(`transforms token to ProseCodeblock's required props`, context => {
             info: 'js',
             content: 'console.log(\n`Baleada`\n)\n'
           }
-        ],
+        ] as Token[],
         value = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
           info: '',
-          component: 'ProseCodeblock',
+          component: 'BaleadaProseCodeblock',
           nextToken: undefined // Not accessed in this case
         }),
         expected = {
@@ -37,13 +38,13 @@ suite(`transforms token to ProseHeading's required props`, context => {
           {
             tag: 'h1',
           }
-        ],
+        ] as Token[],
         value = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
           info: '',
-          component: 'ProseHeading',
+          component: 'BaleadaProseHeading',
           nextToken: tokens[1]
         }),
         expected = {
@@ -55,10 +56,10 @@ suite(`transforms token to ProseHeading's required props`, context => {
   
   const isNotFirst = containerTokenToProps({
           containerType,
-          tokens: [{ type: 'heading_open' }, ...tokens],
+          tokens: [{ type: 'heading_open' }, ...tokens] as Token[],
           index: 1,
           info: '',
-          component: 'ProseHeading',
+          component: 'BaleadaProseHeading',
           nextToken: tokens[1]
         }),
         isNotFirstExpected = {
@@ -75,13 +76,13 @@ suite(`transforms token to ProseMedia's required props`, context => {
           {
             type: containerType,
           }
-        ],
+        ] as Token[],
         value = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
           info: '',
-          component: 'ProseMedia',
+          component: 'BaleadaProseMedia',
           nextToken: tokens[1]
         }),
         expected = {
@@ -92,10 +93,10 @@ suite(`transforms token to ProseMedia's required props`, context => {
 
   const isNotFirst = containerTokenToProps({
           containerType,
-          tokens: [{ type: containerType, info: 'type="img"' }, ...tokens], // All possible ProseMedia types are checked, matching for single and double quotes around the value.
+          tokens: [{ type: containerType, info: 'type="img"' }, ...tokens] as Token[], // All possible BaleadaProseMedia types are checked, matching for single and double quotes around the value.
           index: 1,
           info: '',
-          component: 'ProseMedia',
+          component: 'BaleadaProseMedia',
           nextToken: tokens[1]
         }),
         isNotFirstExpected = {
@@ -147,13 +148,13 @@ suite(`transforms token to ProseTable's required props`, context => {
           { type: 'tr_close', },
           { type: 'tbody_close', },
           { type: 'table_close', }
-        ],
+        ] as Token[],
         value = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
           info: '',
-          component: 'ProseTable',
+          component: 'BaleadaProseTable',
           nextToken: undefined // Not accessed in this case
         }),
         expected= {
@@ -180,13 +181,13 @@ suite(`transforms token to ProseList's required props`, context => {
           { type: 'paragraph_close', },
           { type: 'list_item_close' },
           { type: 'bullet_list_close' },
-        ],
+        ] as Token[],
         value = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
           info: '',
-          component: 'ProseList',
+          component: 'BaleadaProseList',
           nextToken: undefined // Not accessed in this case
         }),
         expected= {

@@ -1,7 +1,15 @@
-import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
-import { lookupPreviousToken } from '../util'
+import type MarkdownIt from 'markdown-it'
+import type { RenderRule } from 'markdown-it/lib/renderer'
+import { Cache } from '../createMarkdownItProseContainer'
+import { lookupPreviousToken } from '../extracted'
 
-export function table ({ md, cache, containerName }) {
+export function table (
+  { md, cache, containerName }: {
+    md: MarkdownIt,
+    cache: Cache,
+    containerName: string,
+  }
+): RenderRule {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isOpen = tokens[index].type.endsWith('open')
@@ -25,7 +33,12 @@ export function table ({ md, cache, containerName }) {
   }
 }
 
-export function tableDescendant ({ md, cache }) {
+export function tableDescendant (
+  { md, cache }: {
+    md: MarkdownIt,
+    cache: Cache,
+  }
+): RenderRule {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isInsideProseContainer = cache.table.isInsideProseContainer,
@@ -60,7 +73,7 @@ export function tableDescendant ({ md, cache }) {
                   .length
       
           // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-          return `<template #${loopedIdPrefix}-0-${loopedIdPrefix}-0-${loopedIdPrefix}-${columnHeaderIndexInRow}="{ ref }"><div :ref="ref">`
+          return `<template #looped-0-looped-0-looped-${columnHeaderIndexInRow}="{ ref }"><div :ref="ref">`
         })()
       case 'td':
         // IIFE for easier variable name reuse
@@ -89,7 +102,7 @@ export function tableDescendant ({ md, cache }) {
                   .length
       
           // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-          return `<template #${loopedIdPrefix}-1-${loopedIdPrefix}-${rowIndexInBody}-${loopedIdPrefix}-${cellIndexInRow}="{ ref }"><div :ref="ref">`
+          return `<template #looped-1-looped-${rowIndexInBody}-looped-${cellIndexInRow}="{ ref }"><div :ref="ref">`
         })()
     }
   }

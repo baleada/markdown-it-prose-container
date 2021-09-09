@@ -1,7 +1,15 @@
-import loopedIdPrefix from '@baleada/vue-prose/loopedIdPrefix'
-import { lookupPreviousToken } from '../util'
+import type MarkdownIt from 'markdown-it'
+import type { RenderRule } from 'markdown-it/lib/renderer'
+import { Cache } from '../createMarkdownItProseContainer'
+import { lookupPreviousToken } from '../extracted'
 
-export function list ({ md, cache, containerType }) {
+export function list (
+  { md, cache, containerType }: {
+    md: MarkdownIt,
+    cache: Cache,
+    containerType: string
+  }
+): RenderRule {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isOpen = tokens[index].type.endsWith('open')
@@ -25,7 +33,12 @@ export function list ({ md, cache, containerType }) {
   }
 }
 
-export function listItem ({ md, cache }) {
+export function listItem (
+  { md, cache }: {
+    md: MarkdownIt,
+    cache: Cache,
+  }
+): RenderRule {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isInsideProseContainer = cache.list.isInsideProseContainer,
@@ -41,7 +54,7 @@ export function listItem ({ md, cache }) {
 
     const reverseListOpenIndex = tokens
             .slice(0, index)
-            .reverse() // Mutates the sliced copy only
+            .reverse()
             .findIndex(({ type }) => ['ordered_list_open', 'bullet_list_open'].includes(type)),
           listOpenIndex = tokens.slice(0, index).length - reverseListOpenIndex,
           itemIndex = tokens
@@ -50,6 +63,6 @@ export function listItem ({ md, cache }) {
             .length
 
     // TODO: this only works for Vue and also breaks possibility of compatibility with other markdown-it plugins
-    return `<template #${loopedIdPrefix}-${itemIndex}="{ ref }"><li :ref="ref">`
+    return `<template #looped-${itemIndex}="{ ref }"><li :ref="ref">`
   }
 }

@@ -1,5 +1,6 @@
 // ::: ...props
 import MarkdownItContainer from 'markdown-it-container'
+import type MarkdownIt from 'markdown-it'
 import {
   container,
   heading,
@@ -9,26 +10,51 @@ import {
   tableDescendant,
 } from './rules'
 
-const defaultOptions = {
+export type Options = {
+  marker?: string,
+  name?: string,
+  template?: 'vue' // | 'jsx' | 'svelte',
+}
+
+const defaultOptions: Options = {
   marker: ':',
   name: 'prose',
+  template: 'vue',
+}
+
+export type Cache<> = {
+  container: {
+    component?:
+    'BaleadaProseAside'
+    | 'BaleadaProseBlockquote'
+    | 'BaleadaProseCodeblock'
+    | 'BaleadaProseDetails'
+    | 'BaleadaProseHeading'
+    | 'BaleadaProseList'
+    | 'BaleadaProseMedia'
+    | 'BaleadaProseSection'
+    | 'BaleadaProseTable'
+  },
+  heading: {
+    isInsideProseContainer?: boolean,
+  },
+  list: {
+    isInsideProseContainer?: boolean,
+  },
+  table: {
+    isInsideProseContainer?: boolean,
+  },
 }
 
 /* type Template = 'vue' // | 'jsx' | 'svelte' */
 
-export default function(md, required = {}, options = {}) {
-  options = {
-    ...defaultOptions,
-    ...options,
-  }
-
-  const { template } = required,
-        { marker, name } = options,
+export const createMarkdownItProseContainer: (options: Options) => MarkdownIt.PluginSimple = options => md => {
+  const { marker, name, template } = { ...defaultOptions, ...options },
         // Various types of open tokens use the cache to communicate to their corresponding close tokens.
         //
         // It's not necessary to have separate nested cache objects, but the extra level of organization
         // is easier to reason about.
-        cache = {
+        cache: Cache = {
           container: {},
           heading: {},
           list: {},

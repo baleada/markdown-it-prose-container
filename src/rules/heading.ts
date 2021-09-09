@@ -1,6 +1,15 @@
-import { lookupPreviousToken } from '../util'
+import type MarkdownIt from 'markdown-it'
+import type { RenderRule } from 'markdown-it/lib/renderer'
+import type { Cache } from '../createMarkdownItProseContainer'
+import { lookupPreviousToken } from '../extracted'
 
-export function heading ({ md, cache, containerType }) {
+export function heading (
+  { md, cache, containerType }: {
+    md: MarkdownIt,
+    cache: Cache,
+    containerType: string,
+  }
+): RenderRule {
   return (tokens, index, options) => {
     const defaultTag = md.renderer.renderToken(tokens, index, options),
           isOpen = tokens[index].type.endsWith('open')
