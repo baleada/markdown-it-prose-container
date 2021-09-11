@@ -1,4 +1,4 @@
-declare module 'virtual:proseMetadata' {
+declare module 'virtual:proseInterfaces' {
   export type PropsInterface = {
     [prop: string]: 'string' | 'boolean' | 'number' | 'array',
   }
@@ -8,7 +8,7 @@ declare module 'virtual:proseMetadata' {
   }
 
   export const propsInterfaces: {
-    name:  'BaleadaProseAside'
+    name: 'BaleadaProseAside'
       | 'BaleadaProseBlockquote'
       | 'BaleadaProseCodeblock'
       | 'BaleadaProseDetails'
@@ -19,6 +19,4 @@ declare module 'virtual:proseMetadata' {
       | 'BaleadaProseTable',
     interface: PropsInterface,
   }[]
-
-  export const loopedIdPrefix: string
 }

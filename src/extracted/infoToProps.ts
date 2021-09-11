@@ -1,5 +1,5 @@
-import { propsInterfaces } from 'virtual:proseMetadata'
-import type { Props } from 'virtual:proseMetadata'
+import { propsInterfaces } from 'virtual:proseInterfaces'
+import type { Props } from 'virtual:proseInterfaces'
 import type Token from "markdown-it/lib/token"
 import type { Cache } from '../createMarkdownItProseContainer'
 
