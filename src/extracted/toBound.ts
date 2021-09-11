@@ -1,5 +1,5 @@
-import type { Props } from "virtual:propsInterfaces"
-import type { Options } from "../createMarkdownItProseContainer"
+import type { Props } from '../state/propsInterfaces'
+import type { Options } from '../createMarkdownItProseContainer'
 
 export function toBound (
   { props, template }: {
