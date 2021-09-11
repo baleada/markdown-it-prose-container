@@ -7,7 +7,7 @@ export function table (
   { md, cache, containerName }: {
     md: MarkdownIt,
     cache: Cache,
-    containerName: string,
+    containerName?: string,
   }
 ): RenderRule {
   return (tokens, index, options) => {

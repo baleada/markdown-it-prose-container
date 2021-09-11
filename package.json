@@ -10,7 +10,8 @@
     "import": "./lib/index.js"
   },
   "scripts": {
-    "prepare": "tsc && rollup --config rollup.config.ts",
+    "propsInterfaces": "node -r esbuild-register scripts/propsInterfaces.ts",
+    "prepare": "npm run propsInterfaces && tsc && rollup --config rollup.config.ts",
     "test:only": "run() { npx uvu tests/$2 $1.test.js$; }; run",
     "test": "npm run test:only ."
   },
@@ -36,6 +37,7 @@
   "homepage": "https://baleada.netlify.com",
   "devDependencies": {
     "@baleada/prepare": "^0.5.12",
+    "dotenv": "^10.0.0",
     "esbuild": "^0.12.26",
     "esbuild-register": "^3.0.0",
     "rollup": "^2.35.1",

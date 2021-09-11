@@ -1,6 +1,6 @@
-import { propsInterfaces } from 'virtual:proseInterfaces'
-import type { Props } from 'virtual:proseInterfaces'
 import type Token from "markdown-it/lib/token"
+import { propsInterfaces } from '../state/propsInterfaces'
+import type { Props } from '../state/propsInterfaces'
 import type { Cache } from '../createMarkdownItProseContainer'
 
 export function infoToProps (

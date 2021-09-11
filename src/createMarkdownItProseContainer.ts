@@ -22,7 +22,7 @@ const defaultOptions: Options = {
   template: 'vue',
 }
 
-export type Cache<> = {
+export type Cache = {
   container: {
     component?:
     'BaleadaProseAside'
@@ -84,15 +84,14 @@ export const createMarkdownItProseContainer: (options: Options) => MarkdownIt.Pl
   // Tables
   md.renderer.rules.table_open = table({ md, cache, containerName: name })
   md.renderer.rules.table_close = table({ md, cache })
-  md.renderer.rules.thead_open = tableDescendant({ md, template, cache })
+  md.renderer.rules.thead_open = tableDescendant({ md, cache })
   md.renderer.rules.thead_close = tableDescendant({ md, cache })
-  md.renderer.rules.tbody_open = tableDescendant({ md, template, cache })
+  md.renderer.rules.tbody_open = tableDescendant({ md, cache })
   md.renderer.rules.tbody_close = tableDescendant({ md, cache })
-  md.renderer.rules.tr_open = tableDescendant({ md, template, cache })
+  md.renderer.rules.tr_open = tableDescendant({ md, cache })
   md.renderer.rules.tr_close = tableDescendant({ md, cache })
-  md.renderer.rules.th_open = tableDescendant({ md, template, cache })
+  md.renderer.rules.th_open = tableDescendant({ md, cache })
   md.renderer.rules.th_close = tableDescendant({ md, cache })
-  md.renderer.rules.td_open = tableDescendant({ md, template, cache })
+  md.renderer.rules.td_open = tableDescendant({ md, cache })
   md.renderer.rules.td_close = tableDescendant({ md, cache })
 }
-

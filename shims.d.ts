@@ -1,4 +1,4 @@
-declare module 'virtual:proseInterfaces' {
+declare module 'virtual:propsInterfaces' {
   export type PropsInterface = {
     [prop: string]: 'string' | 'boolean' | 'number' | 'array',
   }

@@ -7,7 +7,7 @@ export function heading (
   { md, cache, containerType }: {
     md: MarkdownIt,
     cache: Cache,
-    containerType: string,
+    containerType?: string,
   }
 ): RenderRule {
   return (tokens, index, options) => {

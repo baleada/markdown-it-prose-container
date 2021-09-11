@@ -6,7 +6,7 @@ const external = [
         '@baleada/vue-prose',
       ],
       shared = new configureable.Rollup()
-        .input('src/index.js')
+        .input('src/index.ts')
         .external(external)
         .resolve()
         .esbuild(),

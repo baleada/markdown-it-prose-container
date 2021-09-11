@@ -1,5 +1,5 @@
 import type Token from 'markdown-it/lib/token'
-import type { Props } from 'virtual:proseInterfaces'
+import type { Props } from '../state/propsInterfaces'
 import { Cache } from '../createMarkdownItProseContainer'
 import { infoToProps } from './infoToProps'
 
