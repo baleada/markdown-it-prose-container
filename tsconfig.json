@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "types": [
-      "./shims",
-    ],
+    "types": [],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
