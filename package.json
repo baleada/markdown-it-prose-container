@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.12.5",
-    "@baleada/vue-prose": "^0.13.14",
     "@types/markdown-it-container": "^2.0.4",
     "markdown-it": "^12.2.0",
     "markdown-it-container": "^3.0.0"
