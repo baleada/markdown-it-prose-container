@@ -1,7 +1,7 @@
 import { configureable } from '@baleada/prepare'
 
 const external = [
-        'markdown-it',
+        /markdown-it/,
         /markdown-it-container/,
         '@baleada/vue-prose',
       ],
@@ -24,8 +24,6 @@ const external = [
         .output({ file: 'lib/index.d.ts', format: 'esm' })
         .dts()
         .configure()
-        
-
 
 export default [
   esm,
