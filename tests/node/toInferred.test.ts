@@ -1,15 +1,22 @@
+import type Token from 'markdown-it/lib/token'
 import { suite as createSuite } from 'uvu'
 import * as assert from 'uvu/assert'
-import toInferred from '../../src/util/toInferred.js'
+import type { Cache } from '../../src/createMarkdownItProseContainer'
+import { toInferred } from '../../src/extracted'
 
 const suite = createSuite('toInferred (node)')
 
-const cacheStub = { container: {} }
+const cacheStub: Cache = {
+  container: {},
+  heading: {},
+  list: {},
+  table: {},
+}
 
 suite('looks up certain open tokens by next token type', context => {
   const otherParamsStub = {
           info: '',
-          nesting: 1,
+          nesting: 1 as Token['nesting'],
           cache: { ...cacheStub },
         },
         values = [
@@ -24,9 +31,9 @@ suite('looks up certain open tokens by next token type', context => {
   assert.ok(values.every(value => !!value))
 })
 
-suite('recognizes ProseAside open token', context => {
+suite('recognizes BaleadaProseAside open token', context => {
   const otherParamsStub = {
-          nesting: 1,
+          nesting: 1 as Token['nesting'],
           nextTokenType: 'stub',
           cache: { ...cacheStub },
         },
@@ -48,12 +55,12 @@ suite('recognizes ProseAside open token', context => {
           toInferred({ info: '     type="simple"', ...otherParamsStub }),
         ]
   
-  assert.ok(values.every(value => value === 'ProseAside'))
+  assert.ok(values.every(value => value === 'BaleadaProseAside'))
 })
 
-suite('recognizes ProseMedia open tokens', context => {
+suite('recognizes BaleadaProseMedia open tokens', context => {
   const otherParamsStub = {
-          nesting: 1,
+          nesting: 1 as Token['nesting'],
           nextTokenType: 'stub',
           cache: { ...cacheStub },
         },
@@ -78,13 +85,13 @@ suite('recognizes ProseMedia open tokens', context => {
           toInferred({ info: '     type="iframe"', ...otherParamsStub }),
         ]
   
-  assert.ok(values.every(value => value === 'ProseMedia'))
+  assert.ok(values.every(value => value === 'BaleadaProseMedia'))
 
 })
 
-suite('recognizes ProseDetails open tokens', context => {
+suite('recognizes BaleadaProseDetails open tokens', context => {
   const otherParamsStub = {
-          nesting: 1,
+          nesting: 1 as Token['nesting'],
           nextTokenType: 'stub',
           cache: { ...cacheStub },
         },
@@ -95,12 +102,12 @@ suite('recognizes ProseDetails open tokens', context => {
           toInferred({ info: '     summary=Baleada', ...otherParamsStub }),
         ]
   
-  assert.ok(values.every(value => value === 'ProseDetails'))
+  assert.ok(values.every(value => value === 'BaleadaProseDetails'))
 })
 
-suite('falls back to ProseSection open token', context => {
+suite('falls back to BaleadaProseSection open token', context => {
   const otherParamsStub = {
-          nesting: 1,
+          nesting: 1 as Token['nesting'],
           nextTokenType: 'stub',
           cache: { ...cacheStub },
         },
@@ -110,24 +117,24 @@ suite('falls back to ProseSection open token', context => {
           toInferred({ info: 'baz', ...otherParamsStub }),
         ]
   
-  assert.ok(values.every(value => value === 'ProseSection'))
+  assert.ok(values.every(value => value === 'BaleadaProseSection'))
 })
 
 suite('looks up close token in cache', context => {
   const cache = { ...cacheStub }
   
-  const openProseCodeblockStub = {
-    nesting: 1,
+  const openBaleadaProseCodeblockStub = {
+    nesting: 1 as Token['nesting'],
     info: '',
     nextTokenType: 'fence',
     cache,
   }
   
   // Pass open token to establish cache
-  toInferred(openProseCodeblockStub)
+  toInferred(openBaleadaProseCodeblockStub)
 
   const value = toInferred({ nesting: -1, info: undefined, nextTokenType: undefined, cache }),
-        expected = 'ProseCodeblock'
+        expected = 'BaleadaProseCodeblock'
         
   assert.is(value, expected)
 })

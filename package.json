@@ -12,7 +12,7 @@
   "scripts": {
     "propsInterfaces": "node -r esbuild-register scripts/propsInterfaces.ts",
     "prepare": "npm run propsInterfaces && tsc && rollup --config rollup.config.ts",
-    "test:only": "run() { npx uvu tests/$2 $1.test.js$; }; run",
+    "test:only": "run() { uvu -r esbuild-register tests/$2 $1.test.ts$; }; run",
     "test": "npm run test:only ."
   },
   "repository": {

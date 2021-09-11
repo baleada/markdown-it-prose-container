@@ -27,6 +27,8 @@ export function infoToProps (
                 switch (propType) {
                   case 'string':
                     return group
+                      .replace(/^"/, '')
+                      .replace(/"$/, '')
                   case 'number':
                     return Number(group)
                   case 'boolean':
