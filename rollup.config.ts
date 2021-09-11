@@ -1,7 +1,7 @@
 import { configureable } from '@baleada/prepare'
 
 const external = [
-        /markdown-it/,
+        /^markdown-it/,
         /markdown-it-container/,
         '@baleada/vue-prose',
       ],
