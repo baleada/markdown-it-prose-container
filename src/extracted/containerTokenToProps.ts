@@ -73,7 +73,7 @@ const containerTokenToPropsByComponent: {
             index + 1,
             // End index slices to include the list close token. Not really necessary, but easier to reason about.
             // TODO: Does this break for nested lists?
-            tokens.slice(index + 1).findIndex(token => ['ordered_list_close', 'bullet_list_close'].includes(token.type)) + 2
+            index + tokens.slice(index + 1).findIndex(token => ['ordered_list_close', 'bullet_list_close'].includes(token.type)) + 2
           ),
           { tag } = rootAndDescendantTokens[0],
           totalItems = rootAndDescendantTokens

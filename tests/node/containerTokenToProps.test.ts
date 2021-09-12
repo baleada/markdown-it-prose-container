@@ -183,7 +183,8 @@ suite(`transforms token to ProseList's required props`, context => {
           { type: 'bullet_list_close' },
           // Repeated list to make sure not all list items are
           // included in totalItems
-          { type: 'bullet_list_open', tag: 'ul' },
+          proseContainerTokenStub,
+          { type: 'ordered_list_open', tag: 'ol' },
           { type: 'list_item_open' },
           { type: 'paragraph_open' },
           { type: 'inline' },
@@ -194,9 +195,14 @@ suite(`transforms token to ProseList's required props`, context => {
           { type: 'inline' },
           { type: 'paragraph_close', },
           { type: 'list_item_close' },
-          { type: 'bullet_list_close' },
+          { type: 'list_item_open' },
+          { type: 'paragraph_open' },
+          { type: 'inline' },
+          { type: 'paragraph_close', },
+          { type: 'list_item_close' },
+          { type: 'ordered_list_close' },
         ] as Token[],
-        value = containerTokenToProps({
+        value1 = containerTokenToProps({
           containerType,
           tokens,
           index: 0,
@@ -204,12 +210,25 @@ suite(`transforms token to ProseList's required props`, context => {
           component: 'BaleadaProseList',
           nextToken: undefined // Not accessed in this case
         }),
-        expected= {
+        expected1 = {
           tag: 'ul',
           totalItems: 2,
+        },
+        value2 = containerTokenToProps({
+          containerType,
+          tokens,
+          index: 13,
+          info: '',
+          component: 'BaleadaProseList',
+          nextToken: undefined // Not accessed in this case
+        }),
+        expected2 = {
+          tag: 'ol',
+          totalItems: 3,
         }
   
-  assert.equal(value, expected)
+  assert.equal(value1, expected1)
+  assert.equal(value2, expected2)
 })
 
 // Non-required props are handled by infoToProps, which is tested separately
