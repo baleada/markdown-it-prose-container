@@ -1,83 +1,83 @@
-export const proseAside = '\
-::: type="info"\n\
-aside\n\
-:::\
-'
+export const proseAside = `\
+::: type="info"
+aside
+:::
+`
 
-export const proseBlockquote = '\
-:::\n\
-> blockquote\n\
-:::\
-'
+export const proseBlockquote = `\
+:::
+> blockquote
+:::
+`
 
-export const proseCodeblock = '\
-:::\n\
-```js\n\
-codeblock\n\
-other line\n\
-```\n\
-:::\
-'
+export const proseCodeblock = `\
+:::
+\`\`\`js
+codeblock
+other line
+\`\`\`
+:::
+`
 
-export const proseDetails = '\
-::: summary="summary"\n\
-details\n\
-:::\
-'
+export const proseDetails = `\
+::: summary="summary"
+details
+:::
+`
 
-export const proseTable = '\
-:::\n\
-| BaleadaProse | Table |\n\
-| --- | --- |\n\
-| 0, 0 | 0, 1 |\n\
-| 1, 0 | 1, 1 |\n\
-:::\
-'
+export const proseTable = `\
+:::
+| BaleadaProse | Table |
+| --- | --- |
+| 0, 0 | 0, 1 |
+| 1, 0 | 1, 1 |
+:::
+`
 
-export const proseHeading = '\
-:::\n\
-# Heading\n\
-:::\
-'
+export const proseHeading = `\
+:::
+# Heading
+:::
+`
 
-export const proseMedia = '\
-::: ariaLabel="Panama cortado" type=image src="https://res.cloudinary.com/duib7ae0a/image/upload/q_auto,f_auto,w_1500/alex-vipond/panama-cortado.jpg"\n\
-:::\
-'
+export const proseMedia = `\
+::: ariaLabel="Panama cortado" type=image src="https://res.cloudinary.com/duib7ae0a/image/upload/q_auto,f_auto,w_1500/alex-vipond/panama-cortado.jpg"
+:::
+`
 
-export const proseList = '\
-:::\n\
-1. list item\n\
-1. also list item\n\
-:::\n\
-'
+export const proseList = `\
+:::
+1. list item
+1. also list item
+:::
+`
 
-export const proseSection = '\
-:::\n\
-section\n\
-:::\
-'
+export const proseSection = `\
+:::
+section
+:::
+`
 
-export const blockquote = '\
-> blockquote\n\
-'
+export const blockquote = `\
+> blockquote
+`
 
-export const codeblock = '\
-```\n\
-codeblock\n\
-```\n\
-'
+export const codeblock = `\
+\`\`\`
+codeblock
+\`\`\`
+`
 
-export const table = '\
-| Table |\n\
-| --- |\n\
-| table |\n\
-'
+export const table = `\
+| Table |
+| --- |
+| table |
+`
 
-export const heading = '\
-# Heading\n\
-'
+export const heading = `\
+# Heading
+`
 
-export const list = '\
-- list item\n\
-'
+export const list = `\
+- list item
+`

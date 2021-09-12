@@ -26,7 +26,7 @@ suite(`transforms token to ProseCodeblock's required props`, context => {
         }),
         expected = {
           lang: 'js',
-          lines: 3
+          totalLines: 3
         }
 
   assert.equal(value, expected)
@@ -169,6 +169,20 @@ suite(`transforms token to ProseList's required props`, context => {
   const tokens = [
           proseContainerTokenStub,
           // Tokens stub generated on https://markdown-it.github.io/
+          { type: 'bullet_list_open', tag: 'ul' },
+          { type: 'list_item_open' },
+          { type: 'paragraph_open' },
+          { type: 'inline' },
+          { type: 'paragraph_close', },
+          { type: 'list_item_close' },
+          { type: 'list_item_open' },
+          { type: 'paragraph_open' },
+          { type: 'inline' },
+          { type: 'paragraph_close', },
+          { type: 'list_item_close' },
+          { type: 'bullet_list_close' },
+          // Repeated list to make sure not all list items are
+          // included in totalItems
           { type: 'bullet_list_open', tag: 'ul' },
           { type: 'list_item_open' },
           { type: 'paragraph_open' },

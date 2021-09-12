@@ -37,7 +37,7 @@ const containerTokenToPropsByComponent: {
   BaleadaProseCodeblock: ({ tokens, index, info, component }) => ({
     ...infoToProps({ info, component }),
     lang: tokens[index + 1].info,
-    lines: tokens[index + 1].content.replace(userEnteredNewlineRE, '').split('\n').length - 1
+    totalLines: tokens[index + 1].content.replace(userEnteredNewlineRE, '').split('\n').length - 1
   }),
   BaleadaProseHeading: ({ tokens, index, info, component, nextToken }) => ({
     ...infoToProps({ info, component }),
@@ -68,11 +68,15 @@ const containerTokenToPropsByComponent: {
   },
   BaleadaProseList: ({ tokens, index, info, component }) => {
     const rootAndDescendantTokens = tokens.slice(
-            index + 1, // ordered_list_open or bullet_list_open token
-            index + tokens.slice(index).findIndex(token => ['ordered_list_close', 'bullet_list_close'].includes(token.type)) // This slice excludes the close token. Not a problem, because the close token isn't needed.
+            // First token is the container open token.
+            // index + 1 is an ordered_list_open or bullet_list_open token
+            index + 1,
+            // End index slices to include the list close token. Not really necessary, but easier to reason about.
+            // TODO: Does this break for nested lists?
+            tokens.slice(index + 1).findIndex(token => ['ordered_list_close', 'bullet_list_close'].includes(token.type)) + 2
           ),
           { tag } = rootAndDescendantTokens[0],
-          totalItems = tokens
+          totalItems = rootAndDescendantTokens
             .filter(({ type }) => type === 'list_item_open')
             .length
             
